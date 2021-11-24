@@ -1,0 +1,18 @@
+
+{% load static %}
+<nav class="navbar navbar-expand-sm navbar-light p-2 ">
+
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+        <ul class="navbar-nav ">
+        {% for page in navbar %}
+                <li class="nav-item m-2">
+                    {{page}}
+                   <!-- <a class="nav-link  py-0 px-2" href="{% url '' %}">{{page}}</a>-->
+                </li>
+        {% endfor %}
+        </ul>
+    </div>
+    
+</nav>
+        

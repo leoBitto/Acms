@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}     
+        {% for section in section_list %}
+            <div class="section 
+                        container-fluid
+                        d-flex
+                        align-content-centerex 
+                        flex-{{section.flex_mode}} 
+                        justify-content-center
+                        
+                        text-center
+                        "
+                 style="
+                    height:{{section.height}}%;
+                    width:{{section.width}}%;
+
+                    "
+            >
+            {% for text in section.text %}
+                <p class="txt col "> {{ text.txt }} </p>
+            {% endfor %}
+            </div>
+        {% endfor %}
+{% endblock content %}
