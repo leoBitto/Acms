@@ -32,7 +32,6 @@ def base(request):
     }
     if page.has_navBar:
         pages = BlockNav.objects.all()[0].get_pages
-        print('pages', pages)
         context['navbar'] = pages
-    print(context['navbar'])
+
     return render(request, 'section.html', context)

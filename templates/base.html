@@ -20,10 +20,10 @@
         width:{{width}}%;
     
     ">
-   
-        {% if page.has_navBar  %}
+        
+        {% if has_navbar  %}
             {# Header contains the main_navigation block #}
-            {% include "/navbar.html" %}
+            {% include "navbar.html" %}
         {% endif %}
 
         {% block content %}
