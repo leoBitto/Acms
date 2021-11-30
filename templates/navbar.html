@@ -1,16 +1,19 @@
-
 {% load static %}
-<nav class="navbar navbar-expand-sm navbar-light p-2 ">
+<nav class="navbar navbar-expand-sm fixed-{{navbar.}} navbar-light bg-light p-2 ">
 
-
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse justify-content-around" id="navbarCollapse">
-        <ul class="navbar-nav ">
-        {% for page in navbar %}
+        <ul class="navbar-nav justify-content-around">
+        {% for page in navbar.page %}
                 <li class="nav-item m-2">
-                    {% with page as path %}
+                    <a class="nav-link  py-0 px-2"
+                       href="/{{page.url}}">
+                      
+                      {{page.name}}
                     
-                        <a class="nav-link  py-0 px-2" href="/{{path}}">{{path}}</a>
-                    {% endwith%}
+                    </a>
                 </li>
         {% endfor %}
         </ul>

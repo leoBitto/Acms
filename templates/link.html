@@ -1,0 +1,23 @@
+{% block link %}
+    <a class="
+            position-{{link.position}}
+            top-{{link.top}}
+            left-{{link.left}}
+            down-{{link.down}}
+            right-{{link.right}}
+            p-{{link.padding}}
+            m-{{link.margin}}
+            nav-link
+            fs-5
+            text-white
+            
+            d-flex
+            align-items-center
+            justify-content-center
+        "
+        style="
+            height:{{link.height}}%;
+            width:{{link.width}}%;
+        "
+        href="/{{link.pointing_to}}">{{link.name}}</a>
+{% endblock%}

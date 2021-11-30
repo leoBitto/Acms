@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="
-        height:{{height}}%;
-        width:{{width}}%;
+        height:{{page_height}}%;
+        width:{{page_width}}%;
     
     ">
     <head>
@@ -15,10 +15,13 @@
        
     </head>
     
-    <body style="
-        height:{{height}}%;
-        width:{{width}}%;
-    
+    <body class="
+        d-flex
+        flex-{{ page_flex }}
+    " style="
+        height:{{page_height}}%;
+        width:{{page_width}}%;
+
     ">
         
         {% if has_navbar  %}
@@ -26,9 +29,9 @@
             {% include "navbar.html" %}
         {% endif %}
 
-        {% block content %}
+        {% block section %}
 
-        {% endblock content %}
+        {% endblock section %}
     
     
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
