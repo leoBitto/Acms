@@ -1,0 +1,56 @@
+{% load static %}
+{% load classFilter %}
+{% block container %}
+    <div class="
+                container{{ container.breakpoint }}
+                w-{{ container.width }}
+                h-{{ container.height }}
+                p{{ container.padding }}
+                m{{ container.margin }}
+                d{{ container.display }}
+                {{ container.bg_color }}
+                flex{{ container.breakpoint }}-{{ container.direction }} 
+                justify-content{{ container.justify_content }}
+                align-items{{ container.align_items }}
+                flex-grow-{{ container.flex_grow }}
+                {{ container.position }}
+                "
+    >
+
+     {% for overlay in container.overlay_set.all %}
+        {% block overlay %}
+            {% include 'overlay.html' %}
+        {% endblock %}
+    {% endfor%}
+
+    {% for link in container.link_set.all %}
+        {% block Link %}
+            {% include 'link.html' %}
+        {% endblock %}
+    {% endfor %}
+
+    {% if container.orderedContent %}
+        {% for content in container.orderedContent %}
+
+            {% with content|classname as modelclass %}
+
+                {% if modelclass == "Text" %}
+                {% with content as text %}
+                    {% include 'text.html' %}
+                {% endwith %}
+
+                {% elif modelclass == "Image" %}
+                {% with content as image %}
+                    {% include 'image.html' %}
+                {% endwith %}
+
+                {% endif %}
+
+            {% endwith %}
+
+        {% endfor %}
+    {% endif %}
+
+    </div>
+
+{% endblock container %}

@@ -1,29 +1,33 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block section %}     
-        {% for section in section_list %}
-            <div class=" 
-                        container-fluid
-                        d-flex
-                        align-content-center 
-                        flex-{{section.flex_mode}} 
-                        justify-content-center
-                        p-{{section.padding}}
-                        m-{{section.margin}}
-                        align-items-stretch
-                        flex-grow-{{flex_grow}}
-                        "
-                 style="
-                    height:{{section.height}}%;
-                    width:{{section.width}}%;
+{% block section %}
+    <div class="
+                vw-{{ section.width }}
+                vh-{{ section.height }}
+                p{{ section.padding }}
+                m{{ section.margin }}
+                d{{ section.display }}
+                {{ section.bg_color }}
+                flex{{ section.breakpoint }}-{{ section.direction }} 
+                justify-content{{ section.justify_content }}
+                align-items{{ section.align_items }}
+                flex-grow-{{ section.flex_grow }}
+                "
+    >
+    
+    {# in here the will be alist of all the graphical components that can point to a section #}
+    {# just a bunch of components should point to a section #}
+        
+    {# containters #}
+    {% for container in section.container_set.all|dictsort:"order" %}
+        {% block container %}
+            {% include 'container.html' %}
+        {% endblock %}
+    {% endfor %}
 
-                    "
-            >
-           
-            {% block content %}
-                {% include 'content.html'%}
-            {% endblock content %}
-            
-            </div>
-        {% endfor %}
+    {# grids #}
+
+    {# etc... #}
+
+    </div>
+
 {% endblock section %}

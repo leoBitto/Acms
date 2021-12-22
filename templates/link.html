@@ -1,23 +1,31 @@
-{% block link %}
+{% block Link %}
+
     <a class="
-            position-{{link.position}}
-            top-{{link.top}}
-            left-{{link.left}}
-            down-{{link.down}}
-            right-{{link.right}}
-            p-{{link.padding}}
-            m-{{link.margin}}
-            nav-link
-            fs-5
-            text-white
-            
+            w-{{link.width}}
+            h-{{link.height}}
+            p{{link.padding}}
+            m{{link.margin}}
+            {{ link.bg_color }}
             d-flex
-            align-items-center
-            justify-content-center
+            justify-content{{link.justify_content}}
+            align-items{{ link.align_items }}
+            align-self{{ link.align_self }}
+            align-content{{ link.align_content}}
+            
+            {{ link.position }}
+            top-{{ link.top }}
+            left-{{ link.left }}
+            down-{{ link.down }}
+            right-{{ link.right }}
+
+            
         "
-        style="
-            height:{{link.height}}%;
-            width:{{link.width}}%;
-        "
-        href="/{{link.pointing_to}}">{{link.name}}</a>
-{% endblock%}
+        href="{% url link.getLink  %}">
+            {% with link.textShown as text %}
+            {% block Text %}
+                {% include 'text.html' %}
+            {% endblock %}
+            {% endwith %}
+        </a>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+{% block overlay %}
+    <div class="
+            w-{{overlay.width}}
+            h-{{overlay.height}}
+            p{{overlay.padding}}
+            m{{overlay.margin}}
+            {{ overlay.bg_color }}
+            d-flex
+            justify-content{{overlay.justify_content}}
+            align-items{{ overlay.align_items }}
+            align-self{{ overlay.align_self }}
+            align-content{{ overlay.align_content}}
+            
+            {{ overlay.position }}
+            top-{{ overlay.top }}
+            left-{{ overlay.left }}
+            down-{{ overlay.down }}
+            right-{{ overlay.right }}
+        "
+        style="z-index:5000">
+        {% for link in overlay.link_set.all %}
+            {% block Link %}
+                {% include 'link.html' %}
+            {% endblock %}
+        {% endfor %}
+    </div>
+{% endblock %}

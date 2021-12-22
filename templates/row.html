@@ -1,0 +1,25 @@
+{% load static %}
+{% block row %}     
+        {% for row in page.row_set.all %}
+            <div class=" 
+                        row
+                        w-{{ row.width }}
+                        h-{{ row.height }}
+                        p-{{ row.padding }}
+                        m-{{ row.margin }}
+                        d-{{ row.display }}
+                        {{ row.bg_color }}
+                        flex-{{ row.direction }} 
+                        justify-content{{ row.justify_content }}
+                        align-items{{ row.align_items }}
+                        flex-grow-{{ row.flex_grow }}
+                        "
+            >
+            
+            {% block col %}
+                {% include 'col.html'%}
+            {% endblock col %}
+            
+            </div>
+        {% endfor %}
+{% endblock row %}

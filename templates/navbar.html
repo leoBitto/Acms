@@ -1,23 +1,22 @@
-{% load static %}
-<nav class="navbar navbar-expand-sm fixed-{{navbar.}} navbar-light bg-light p-2 ">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      Bootstrap
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-around" id="navbarCollapse">
-        <ul class="navbar-nav justify-content-around">
-        {% for page in navbar.page %}
-                <li class="nav-item m-2">
-                    <a class="nav-link  py-0 px-2"
-                       href="/{{page.url}}">
-                      
-                      {{page.name}}
-                    
-                    </a>
-                </li>
-        {% endfor %}
-        </ul>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </div>
     </div>
-    
+  </div>
 </nav>
-        
+{% endblock %}

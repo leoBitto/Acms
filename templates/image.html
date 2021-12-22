@@ -1,0 +1,22 @@
+{% load static %}
+{% block image %}
+ 
+ <img class="
+                    img-fluid
+                    mx-auto
+                    d-block
+                    w-{{image.width}}
+                    h-{{image.height}}
+                    m-{{image.margin}}
+                    p-{{image.padding}}
+                    {{ image.position }}
+                    top-{{ image.top }}
+                    left-{{ image.left }}
+                    down-{{ image.down }}
+                    right-{{ image.right }}
+                    " 
+
+                src="/media/{{ image.url }}"
+            >
+
+{% endblock %}
