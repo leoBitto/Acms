@@ -340,7 +340,19 @@ class TextAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Text Properties',
             {
-                'fields':('txt', 'author','container'),
+                'fields':('txt', 
+                        'author',
+                        'container',
+                        'color',
+                        'overflow',
+                        'alignment',
+                        'size',
+                        'weight',
+                        'italics',
+                        'line_height',
+                        'text_decoration',
+                        'vertical_align',
+                        ),
                 'description':"""the properties relative to the Text css"""
             }
             ),

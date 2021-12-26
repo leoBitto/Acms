@@ -71,18 +71,18 @@ https://getbootstrap.com/docs/5.0
     API
     DONE__Background
     NOTUSEFULLFORNOW__borders
-    colors
+    DONE__colors
     DONE__display
     DONE__Flex
     NOTUSEFULLFORNOW__float
     NOTUSEFULLFORNOW__interactions
-    overflow
+    DONE__overflow
     DONE__position
     DONE__shadows
     DONE__sizing
     DONE__spacing
-    text
-    vertical align
+    DONE__text
+    DONE__vertical align
     DONE__visibility
 
 #####IDEA:: make CSS model concrete and make it point to 
