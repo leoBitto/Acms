@@ -2,9 +2,9 @@
 from django.db import models
 from ..abstract.abstract import Flex
 
+
 class Navbar(Flex):
-    width = 100
-    margin = '-0'
+
     ##logo
     #optional image inside the navbar-brand
     #div
@@ -36,7 +36,7 @@ class Navbar(Flex):
             """
         ) 
     ##position(placement)
-    position = models.CharField(
+    placement = models.CharField(
                     choices=[
                             ('', 'default position'),
                             ('fixed-top', 'fixed top'),
@@ -49,5 +49,16 @@ class Navbar(Flex):
                                 max_length=20
                             )
     
+    @property
+    def get_pages(self):
+        from ..pages import Page
+        links=[]
+        for page in Page.objects.all():
+            if page.url == '' : 
+                u=page.name 
+            else: u=page.url
+            links.append((page.name, 'Acms:' + u))
+        return links
+
     def __str__(self):
         return "navbar"

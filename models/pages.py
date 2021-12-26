@@ -12,12 +12,7 @@ class Page(models.Model):
     
     url = models.CharField(blank=True, max_length=100, unique=True)
     name = models.CharField(blank=True, null=True, default=url, max_length=100, unique=True)
-    # navbar = models.ForeignKey(
-    #    Navbar, 
-    #    on_delete=models.SET_NULL,
-    #    null=True, 
-    #    blank=True, 
-    #    )
+    navbar = models.ForeignKey(Navbar, on_delete=models.SET_NULL, null=True,  blank=True,)
     
     has_footer = models.BooleanField(null=True, blank=True, default=False)
 
@@ -61,13 +56,3 @@ class Page(models.Model):
         
 
     
-class Section(Flex):
-    #every section group the containers, 
-    #the sections can be ordered
-
-    name = models.CharField(max_length=100, null=True)
-    page = models.ForeignKey(Page, on_delete=models.SET_NULL, blank=True, null=True)
-    order = models.IntegerField(default=1, null=True, blank=True)
-    
-    def __str__(self):
-        return "Section " + str(self.order) + " of " + str(self.page.name)  

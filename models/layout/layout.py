@@ -1,82 +1,17 @@
 from django.db import models
-from .. import pages
+from ..pages import Page
 from ..abstract.abstract import Flex
-from django.core.validators import MaxValueValidator, MinValueValidator
 
+class Section(Flex):
+    #every section group the containers, 
+    #the sections can be ordered
 
-class Row(Flex):
+    name = models.CharField(max_length=100, null=True)
+    page = models.ForeignKey(Page, on_delete=models.SET_NULL, blank=True, null=True)
     
-    name = models.CharField(
-        max_length=50, 
-        blank=True
-        )
     
-    order = models.IntegerField()
-    #dimension = models.PositiveIntegerField(default=10, validators=[MinValueValidator(1), MaxValueValidator(100)])
-
-    #page = models.ForeignKey(pages.Page, on_delete=models.SET_NULL, blank=True, null=True)
-
     def __str__(self):
-        return ' Row ' + str(self.order)  
-    
-
-class Col(Flex):
-    name = models.CharField(
-        max_length=50, 
-        blank=True
-        )
-
-    breakpoint = models.CharField(
-        max_length=10,
-        choices=[
-            ('sm','-sm'),
-            ('md','-md'),
-            ('lg','-lg'),
-            ('xl','-xl'),
-            ('xxl','-xxl'),
-            ('fluid','-fluid'),
-        ],
-        default='',
-        blank=True,
-        )
-
-    align_self = models.CharField(
-        max_length=10,
-        choices=[
-            ('start','-start'),
-            ('center','-center'),
-            ('end','-end'),
-        ],
-        default='',
-        blank=True,
-        )
-    
-    justify_content = models.CharField(
-        max_length=10,
-        choices=[
-            ('start','-start'),
-            ('center','-center'),
-            ('end','-end'),
-            ('around','-around'),
-            ('between','-between'),
-            ('evenly','-evenly'),
-        ],
-        default='',
-        blank=True,
-        )
-    
-    dimension = models.PositiveIntegerField(default='', validators=[MinValueValidator(1), MaxValueValidator(12)], blank=True, null=True)
-    
-    order = models.IntegerField()
-    
-    row = models.ForeignKey(Row, on_delete=models.SET_NULL, blank=True, null=True)
-
-    def __str__(self):
-        return str(self.row) + ' Col ' + str(self.order)
-
-
-class Grid(Flex):
-    ...
+        return "Section " + self.order[-1] + " of " + str(self.page.name)  
 
 
 class Container(Flex):
@@ -86,22 +21,11 @@ class Container(Flex):
         max_length=100,
         )
     section = models.ForeignKey(
-        pages.Section, 
+        Section, 
         on_delete=models.SET_NULL, 
         blank=True, 
         null=True,
         )
-    col = models.ForeignKey(
-        Col, 
-        on_delete=models.SET_NULL, 
-        blank=True, 
-        null=True,
-        )
-    order = models.IntegerField(
-        blank=True,
-        null=True,
-        default=1,
-     )
 
     @property
     def orderedContent(self):
@@ -125,3 +49,5 @@ class Container(Flex):
 
     def __str__(self):
         return 'Container' + self.name
+
+

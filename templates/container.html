@@ -1,20 +1,51 @@
 {% load static %}
 {% load classFilter %}
 {% block container %}
-    <div class="
-                container{{ container.breakpoint }}
-                w-{{ container.width }}
-                h-{{ container.height }}
-                p{{ container.padding }}
-                m{{ container.margin }}
-                d{{ container.display }}
-                {{ container.bg_color }}
+    <div 
+            id = "{{ container.CSS_id }}"
+            class="
+             container
+                {{ container.CSS_classes }}
+
+                mw-{{ container.width }}
+                mh-{{ container.height }}
+                
+                p{{ container.padding_sides }}{{ container.padding }}
+                m{{ container.margin_sides }}{{ container.margin }}
+
+                {{ container.bg_color }}{{ container.bg_gradient }}
+                {{ container.shadow }}
+
+                d{{ container.display }}{{ container.inline }}
+                {{ container.visibility }}
+
+                {{ container.position }}
+                {% if container.position == 'position-absolute' %}
+                    top-{{ container.top }}
+                    start-{{ container.left }}
+                    bottom-{{ container.down }}
+                    end-{{ container.right }}
+                {% endif %}
+
                 flex{{ container.breakpoint }}-{{ container.direction }} 
+                {{ container.order}}
+                flex{{ container.flex_wrap }}
                 justify-content{{ container.justify_content }}
                 align-items{{ container.align_items }}
+                align-content{{ container.align_content }}
                 flex-grow-{{ container.flex_grow }}
-                {{ container.position }}
+
+                align-self{{ container.align_self }}
+                
                 "
+    {% if container.bg_image != '' %}
+    style="  
+        background-image: url('{{ container.bg_image.url }}'); 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+    "
+    {% endif %}
     >
 
      {% for overlay in container.overlay_set.all %}

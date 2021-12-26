@@ -5,7 +5,7 @@ class AcmsConfig(AppConfig):
     name = 'Acms'
 
     #ready method override
-    def ready(self):
+    def ready(self, *args, **kwargs):
         from .urls import urlpatterns
         from django.urls import path
         from .views import views
@@ -13,7 +13,7 @@ class AcmsConfig(AppConfig):
         #in the db in urlpatterns in urls.py
         from .models.pages import Page
         pages = Page.objects.all()
-
+        #pages=[]
         for page in pages:
             if page.url == '':
                 n = page.name
@@ -26,4 +26,5 @@ class AcmsConfig(AppConfig):
                         name=n
                         )
                     )
+        super().ready(*args, **kwargs)
         

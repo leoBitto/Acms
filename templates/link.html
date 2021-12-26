@@ -1,26 +1,53 @@
 {% block Link %}
 
-    <a class="
-            w-{{link.width}}
-            h-{{link.height}}
-            p{{link.padding}}
-            m{{link.margin}}
-            {{ link.bg_color }}
-            d-flex
-            justify-content{{link.justify_content}}
-            align-items{{ link.align_items }}
-            align-self{{ link.align_self }}
-            align-content{{ link.align_content}}
-            
-            {{ link.position }}
-            top-{{ link.top }}
-            left-{{ link.left }}
-            down-{{ link.down }}
-            right-{{ link.right }}
+        <a 
+            id = "{{ link.CSS_id }}"
+            class="
+                link
+                {{ link.CSS_classes }}
 
-            
-        "
-        href="{% url link.getLink  %}">
+                mw-{{ link.width }}
+                mh-{{ link.height }}
+                
+                p{{ link.padding_sides }}{{ link.padding }}
+                m{{ link.margin_sides }}{{ link.margin }}
+
+                {{ link.bg_color }}{{ link.bg_gradient }}
+                {{ link.shadow }}
+
+                d{{ link.display }}{{ link.inline }}
+                {{ link.visibility }}
+
+                {{ link.position }}
+                {% if link.position == 'position-absolute' %}
+                    top-{{ link.top }}
+                    start-{{ link.left }}
+                    bottom-{{ link.down }}
+                    end-{{ link.right }}
+                {% endif %}
+
+                flex{{ link.breakpoint }}-{{ link.direction }} 
+                {{link.order}}
+                flex{{ link.flex_wrap }}
+                justify-content{{ link.justify_content }}
+                align-items{{ link.align_items }}
+                align-content{{ link.align_content }}
+                flex-grow-{{ link.flex_grow }}
+
+                align-self{{ link.align_self }}
+                {{ link.stretched_link }}
+                "
+    {% if link.bg_image != '' %}
+    style="  
+        background-image: url('{{link.bg_image.url}}'); 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+    "
+    {% endif %}
+
+            href="{% url link.getLink  %}"
+        >
             {% with link.textShown as text %}
             {% block Text %}
                 {% include 'text.html' %}

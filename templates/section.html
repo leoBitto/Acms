@@ -1,17 +1,50 @@
 {% load static %}
 {% block section %}
-    <div class="
-                vw-{{ section.width }}
-                vh-{{ section.height }}
-                p{{ section.padding }}
-                m{{ section.margin }}
-                d{{ section.display }}
-                {{ section.bg_color }}
+    <div 
+            id = "{{ section.CSS_id }}"
+            class="
+                section
+                {{ section.CSS_classes }}
+
+                min-vw-{{ section.width }}
+                min-vh-{{ section.height }}
+                
+                p{{ section.padding_sides }}{{ section.padding }}
+                m{{ section.margin_sides }}{{ section.margin }}
+
+                {{ section.bg_color }}{{ section.bg_gradient }}
+                {{ section.shadow }}
+
+                d{{ section.display }}{{ section.inline }}
+                {{ section.visibility }}
+
+                {{ section.position }}
+                {% if section.position == 'position-absolute' %}
+                    top-{{ section.top }}
+                    start-{{ section.left }}
+                    bottom-{{ section.down }}
+                    end-{{ section.right }}
+                {% endif %}
+
                 flex{{ section.breakpoint }}-{{ section.direction }} 
+                {{section.order}}
+                flex{{ section.flex_wrap }}
                 justify-content{{ section.justify_content }}
                 align-items{{ section.align_items }}
+                align-content{{ section.align_content }}
                 flex-grow-{{ section.flex_grow }}
+
+                align-self{{ section.align_self }}
+                
                 "
+    {% if section.bg_image != '' %}
+    style="  
+        background-image: url('{{section.bg_image.url}}'); 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+    "
+    {% endif %}
     >
     
     {# in here the will be alist of all the graphical components that can point to a section #}

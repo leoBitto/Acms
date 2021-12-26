@@ -15,15 +15,14 @@
         
         ">
         
-        {% comment %} 
-        {% if page  %}
-            {% with page %}
-            {# contains the main_navigation block #}
+        {% if page.navbar != Null %}
+        {% with page.navbar as navbar %}
+            {% block navbar %}
             {% include "navbar.html" %}
-            {% endwith %}
-        {% endif %} 
-        {% endcomment %}
-
+            {% endblock %}
+        {% endwith %} 
+        {% endif %}
+        
 
         {% for section in page.section_set.all %}
             {% block section %}

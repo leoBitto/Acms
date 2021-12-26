@@ -14,5 +14,7 @@ def base(request):
         
         }
     print(context['page'])
-    #print(context['rows_list'])
+    print(page.url)
+    from ..urls import urlpatterns
+    print(urlpatterns)
     return render(request, 'base.html', context)

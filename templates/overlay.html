@@ -1,24 +1,53 @@
 {% load static %}
 {% block overlay %}
-    <div class="
-            w-{{overlay.width}}
-            h-{{overlay.height}}
-            p{{overlay.padding}}
-            m{{overlay.margin}}
-            {{ overlay.bg_color }}
-            d-flex
-            justify-content{{overlay.justify_content}}
-            align-items{{ overlay.align_items }}
-            align-self{{ overlay.align_self }}
-            align-content{{ overlay.align_content}}
-            
-            {{ overlay.position }}
-            top-{{ overlay.top }}
-            left-{{ overlay.left }}
-            down-{{ overlay.down }}
-            right-{{ overlay.right }}
-        "
-        style="z-index:5000">
+    <div 
+            id = "{{ overlay.CSS_id }}"
+            class="
+                overlay
+                {{ overlay.CSS_classes }}
+
+                mw-{{ overlay.width }}
+                mh-{{ overlay.height }}
+                
+                p{{ overlay.padding_sides }}{{ overlay.padding }}
+                m{{ overlay.margin_sides }}{{ overlay.margin }}
+
+                {{ overlay.bg_color }}{{ overlay.bg_gradient }}
+                {{ overlay.shadow }}
+
+                d{{ overlay.display }}{{ overlay.inline }}
+                {{ overlay.visibility }}
+
+                {{ overlay.position }}
+                {% if overlay.position == 'position-absolute' %}
+                    top-{{ overlay.top }}
+                    start-{{ overlay.left }}
+                    bottom-{{ overlay.down }}
+                    end-{{ overlay.right }}
+                {% endif %}
+
+                flex{{ overlay.breakpoint }}-{{ overlay.direction }} 
+                {{overlay.order}}
+                flex{{ overlay.flex_wrap }}
+                justify-content{{ overlay.justify_content }}
+                align-items{{ overlay.align_items }}
+                align-content{{ overlay.align_content }}
+                flex-grow-{{ overlay.flex_grow }}
+
+                align-self{{ overlay.align_self }}
+                
+                "
+    {% if overlay.bg_image != '' %}
+    style="  
+        background-image: url('{{overlay.bg_image.url}}'); 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+    "
+    {% endif %}
+            style="z-index:5000"
+        >
+
         {% for link in overlay.link_set.all %}
             {% block Link %}
                 {% include 'link.html' %}

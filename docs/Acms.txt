@@ -56,36 +56,42 @@ https://getbootstrap.com/docs/5.0
     toast
     tooltips
     ADDED___overlay
-    
-    
+     
 
 #helpers
     clearfix
-    coloredlinks
-    ratio
-    AVOIDED TECH__position
-    visually hidden 
+    NOTUSEFULLFORNOW__coloredlinks
+    NOTUSEFULLFORNOW__ratio
+    AVOIDED__position
+    AVOIDED__visually hidden 
     DONE___stretched link (OVERLAY COMPONENT)
-    text truncation
+    AVOIDED__text truncation
 
 #utilities
     API
-    Background
-    borders
+    DONE__Background
+    NOTUSEFULLFORNOW__borders
     colors
-    display
-    Flex
-    float
-    interactions
+    DONE__display
+    DONE__Flex
+    NOTUSEFULLFORNOW__float
+    NOTUSEFULLFORNOW__interactions
     overflow
-    position
-    shadows
-    sizing
-    spacing
+    DONE__position
+    DONE__shadows
+    DONE__sizing
+    DONE__spacing
     text
     vertical align
-    visibility
+    DONE__visibility
 
+#####IDEA:: make CSS model concrete and make it point to 
+            the single component, many components can then 
+            point to the set of CSS properties that return 
+            a string of classes created with the parameters
+            set. this allow components that dont need CSS 
+            properties to be easily set. 
+            as it is for now its not too messy
 
 ###########################################################
 ### How to ################################################
@@ -140,7 +146,7 @@ it is done there so we are sure everything is loaded
         layout.py
 
 
-##css models and files that contain them
+##css models and files that contain them.
 files.py:    
                     Model
                     |
@@ -162,6 +168,7 @@ components/navbar   Navbar
 ##CSS
     is an ABSTRACT class containing all the parameters that
     bootstrap allow you to control, 
+    the parameters 
 
 ##Flex
     is another ABSTRACT class that let you to control the 
@@ -180,11 +187,12 @@ components/navbar   Navbar
     container etc...
     the sections can be ordered
     ALL THE SECTIONS ARE STACKED VERTICALLY
-    AND SPAN THE ENTIRE VIEW-WIDTH
+    AND SPAN THE ENTIRE VIEW-WIDTH AND VIEW-HEIGHT 
     the sections contain groups of container to avoid using
     rows and columns that display containers orizontaly 
     and vertically respectively while the section can 
     have content both vertical and orizontal. 
+    WE SHOULD AIM TO MINIMIZE THE NUMBER OF SectionS PER PAGE
 
 ##Container 
     allow to group content wether it is text, images, 
@@ -198,6 +206,10 @@ components/navbar   Navbar
 ##Grid
     it is a class created to be pointed by rows and cols
     it organize the content to facilitate the display
+
+
+##Navbar
+    
 
 ##CONTENTS
 ###Text
@@ -270,13 +282,14 @@ THEY ALL ACCEPT TUPLES OF N ELEMENTS
                 attributes
     -list_display_links: tuples of the properties that should be
                         links to the change page of the object
+                        refered by the admin class
     -list_filter: activate filters in the right sidebar of the
                 change list page. the tuple it accept should 
                 contain one the following types:
                 > a field name
                 > a class created using SimpleListFilter from admin
                 > a touple containing both of the options above
-
+    -search_fields: activate a searchbar 
 
 
 
