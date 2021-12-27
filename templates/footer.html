@@ -1,0 +1,23 @@
+
+{% block footer %}
+<footer class="container-fluid row">
+    <div class = "col-4 justify-content-start">
+        <p>{{footer.text_l}}</p>
+    </div>
+
+    <div class = "col-4 justify-content-center">
+
+    {% if footer.logo %}
+        {% with footer.logo as image %}
+        {% include 'image.html' %}
+        {% endwith %}
+    {% endif %}
+
+    </div>
+
+    <div class = "col-4 justify-content-end">
+        <p>{{footer.text_r}}</p>
+    </div>
+</nav>
+{% endblock %}
+</footer>

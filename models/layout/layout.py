@@ -1,17 +1,20 @@
 from django.db import models
-from ..pages import Page
+
 from ..abstract.abstract import Flex
+from ..pages import Page
+from ..content.image import Image
+from ..content.text import Text
 
 class Section(Flex):
     #every section group the containers, 
     #the sections can be ordered
 
     name = models.CharField(max_length=100, null=True)
-    page = models.ForeignKey(Page, on_delete=models.SET_NULL, blank=True, null=True)
+    page = models.ManyToManyField(Page)
     
     
     def __str__(self):
-        return "Section " + self.order[-1] + " of " + str(self.page.name)  
+        return self.name  
 
 
 class Container(Flex):
@@ -20,21 +23,26 @@ class Container(Flex):
         blank=True, 
         max_length=100,
         )
-    section = models.ForeignKey(
+    section = models.ManyToManyField(
         Section, 
-        on_delete=models.SET_NULL, 
+        )
+    texts = models.ManyToManyField(
+        Text,
         blank=True, 
-        null=True,
+        )
+    images = models.ManyToManyField(
+        Image,
+        blank=True, 
         )
 
     @property
     def orderedContent(self):
         ordered = []
         #recall all txt linked
-        for t in self.text_set.all():
+        for t in self.texts.all():
             ordered.append(t)
         #recall all image linked
-        for i in self.image_set.all():
+        for i in self.images.all():
             ordered.append(i)
         # order them by .order
         ordered.sort(key=lambda x: x.order)

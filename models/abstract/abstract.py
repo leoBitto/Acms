@@ -348,7 +348,7 @@ class Flex(CSS):
         )
 
     flex_grow = models.IntegerField(
-        default='',
+        default=1,
         blank=True,
         null=True,
         help_text="""

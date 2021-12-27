@@ -31,9 +31,12 @@
         {% endfor %}
 
 
-        {% if page.has_footer  %}
-            {#  #}
+        {% if page.footer != Null %}
+        {% with page.footer as footer %}
+            {% block footer %}
             {% include "footer.html" %}
+            {% endblock %}
+        {% endwith %} 
         {% endif %}
     
     

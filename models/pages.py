@@ -1,10 +1,8 @@
 from django.conf.urls import url
 from django.db import models
 
-
-from .abstract.abstract import Flex
 from .components.navbar import Navbar
-
+from .components.footer import Footer
 
 class Page(models.Model):
     #this is the page model, every page contains a certain number
@@ -12,9 +10,9 @@ class Page(models.Model):
     
     url = models.CharField(blank=True, max_length=100, unique=True)
     name = models.CharField(blank=True, null=True, default=url, max_length=100, unique=True)
-    navbar = models.ForeignKey(Navbar, on_delete=models.SET_NULL, null=True,  blank=True,)
     
-    has_footer = models.BooleanField(null=True, blank=True, default=False)
+    navbar = models.ForeignKey(Navbar, on_delete=models.SET_NULL, null=True,  blank=True,)
+    footer = models.ForeignKey(Footer, on_delete=models.SET_NULL, null=True, blank=True,)
 
     description = models.TextField(
         blank=True,
@@ -42,8 +40,7 @@ class Page(models.Model):
                     )
                 )
         
-        super().save(*args, **kwargs)#call the real save() method 
-        
+        super().save(*args, **kwargs)#call the real save() method   
 
     def delete(self, *args, **kwargs):
         from ..urls import urlpatterns

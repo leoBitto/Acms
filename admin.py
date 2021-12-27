@@ -7,6 +7,7 @@ from .models.content.text import Text
 from .models.layout.layout import *
 from .models.components.link import Link
 from .models.components.navbar import Navbar
+from .models.components.footer import Footer
 from .models.components.overlay import Overlay
 
 
@@ -40,7 +41,7 @@ class PageAdmin(admin.ModelAdmin):
             ),
         ('Components',
             {
-                'fields':('has_footer','navbar',),
+                'fields':('footer','navbar',),
                 'description':"""indicate the two (or three, modals 
                                 should be added ) components that 
                                 can be inserted in a page"""
@@ -52,7 +53,6 @@ class PageAdmin(admin.ModelAdmin):
 class SectionAdmin(admin.ModelAdmin):
     list_display = (
                     'name',
-                    'page',
                     'order',
         )
     fieldsets = (
@@ -145,9 +145,7 @@ class NavbarAdmin(admin.ModelAdmin):
         ('Flex property',
             {
                 'fields': (
-                        
                         'justify_content',
-                        
                         ),
                 'description': """these properties set the classes
                                 that bootstrap use to manage flexbox""",
@@ -158,16 +156,27 @@ class NavbarAdmin(admin.ModelAdmin):
         )
   
 
+class FooterAdmin(admin.ModelAdmin):
+    list_display = (
+        '__str__',   
+    )
+
+
 class ContainerAdmin(admin.ModelAdmin):
     list_display = (
                     'name',
-                    'section',
                     'order',
         )
     fieldsets = (
         ('Container Properties',
             {
-                'fields':('name','section','order',),
+                'fields':(
+                    'name',
+                    'section',
+                    'texts',
+                    'images',
+                    'order',
+                    ),
                 'description':"""the properties relative to the container"""
             }
         ),
@@ -331,18 +340,15 @@ class LinkAdmin(admin.ModelAdmin):
 
 class TextAdmin(admin.ModelAdmin):
     list_display = (
-                    'txt', 
+                    '__str__', 
                     'author', 
                     'creation_date', 
-                    
-                    'container',
                     )
     fieldsets = (
         ('Text Properties',
             {
                 'fields':('txt', 
                         'author',
-                        'container',
                         'color',
                         'overflow',
                         'alignment',
@@ -391,14 +397,12 @@ class ImageAdmin(admin.ModelAdmin):
                     'url', 
                     'author', 
                     'creation_date', 
-                     
-                    'container',
                     'image_tag',
                     )
     fieldsets = (
         ('Overlay Properties',
             {
-                'fields':('url', 'author','container'),
+                'fields':('url', 'author',),
                 'description':"""the properties relative to the Image css"""
             }
             ),
@@ -436,6 +440,7 @@ class ImageAdmin(admin.ModelAdmin):
 
 admin.site.register(Page, PageAdmin)
 admin.site.register(Navbar, NavbarAdmin)
+admin.site.register(Footer, FooterAdmin)
 admin.site.register(Text, TextAdmin)
 admin.site.register(Section, SectionAdmin)
 admin.site.register(Container, ContainerAdmin)

@@ -12,19 +12,22 @@ class AcmsConfig(AppConfig):
         #add the urls of the Page objects
         #in the db in urlpatterns in urls.py
         from .models.pages import Page
-        pages = Page.objects.all()
-        #pages=[]
-        for page in pages:
-            if page.url == '':
-                n = page.name
-            else:
-                n = page.url
-            urlpatterns.append(
-                    path(
-                        page.url, 
-                        views.base, 
-                        name=n
+        try:
+            pages = Page.objects.all()
+            for page in pages:
+                if page.url == '':
+                    n = page.name
+                else:
+                    n = page.url
+                urlpatterns.append(
+                        path(
+                            page.url, 
+                            views.base, 
+                            name=n
+                            )
                         )
-                    )
-        super().ready(*args, **kwargs)
+            super().ready(*args, **kwargs)
+        except:
+            super().ready(*args, **kwargs)
+        
         

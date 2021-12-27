@@ -131,6 +131,37 @@ it is done there so we are sure everything is loaded
     MANY have to point to the one, its not possible for the
     ONE to have a list of the many
 
+### ManyToMany relationship
+    class A:
+        ...
+    
+    class B:
+        ...
+        relationship = ManyToMany(A, )
+
+    class A can have many class B objects
+    and 
+    class B can be pointed by many class A objects
+    they can be accesed by:
+    b.As.all()
+    a.b_set.all()
+
+### GenericForeignKey
+    Django offers a special way of referencing any model 
+    in the project called GenericForeignKey.
+    Generic foreign keys are part of the Content Types 
+    framework built into Django. 
+    The content type framework is used by Django itself to
+    keep track of models. 
+    This is necessary for some core capabilities such as 
+    migrations and permissions.
+
+    To implement a many-to-many relation using 
+    GenericForeignKey, you need to manually create a model 
+    to connect A e B
+
+https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key
+
 ## organization of the models in the file system
 / indicates directories
 /models
