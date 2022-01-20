@@ -11,7 +11,9 @@ def base(request):
         'page'  : page,        
         }
 
-    from ..urls import urlpatterns
-    print(urlpatterns)
+   
+
+    # from ..urls import urlpatterns
+    # print(urlpatterns)
 
     return render(request, 'base.html', context)

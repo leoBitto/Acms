@@ -4,18 +4,92 @@ from django.utils.html import format_html
 from .models.pages import Page
 from .models.content.image import Image
 from .models.content.text import Text
-from .models.layout.layout import *
-from .models.components.link import Link
+from .models.layout.container import Container
+from .models.layout.section import Section
+from .models.content.link import Link
 from .models.components.navbar import Navbar
 from .models.components.footer import Footer
 from .models.components.overlay import Overlay
 
+html_tags =('HTML tags',
+                {'fields': (
+                        ('CSS_id','CSS_classes',),
+                        ),
+                'description': """these properties set the HTML tags""",
+                'classes':('collapse',),
+                }
+    )
+sizes= ('Sizes',
+            {
+            'fields':(('height','width'),),
+            'description':"sizes of the div, they refer to min viewports. leave height empty to make it adapt to content. the width is always set to 100",
+            'classes':('collapse','wide'),
+            })
+spacing=('Spacing',
+            {
+            'fields':(
+                    ('padding','padding_sides',),
+                    ('margin','margin_sides',),
+                    ),
+            'description':"padding and margins",
+            'classes':('collapse',),
+            })
+background=('Background',
+            {
+            'fields': (
+                    'bg_image',
+                    'bg_color',
+                    'bg_gradient',
+                    'shadow',
+                    ),
+            'description':"background properties",
+            'classes':('collapse',),                        
+            })
+position=('Position',
+            {
+            'fields':(
+                    'order',
+                    'position',
+                    ('top',
+                    'left',
+                    'down',
+                    'right',),
+                    ),
+            'description':"positioning",
+            'classes':('collapse',),
+            })
+misc=('Misc',
+            {
+            'fields':
+                    ('breakpoint',
+                    'visibility',
+                    ('display',
+                     'inline',),
+                     ),
+            'description':"miscellaneous properties, breakpoint refer to the flex direction",
+            'classes':('collapse',),
+            })
+flex_properties=('Flex properties',
+            {
+            'fields': (
+                    'direction',
+                    'align_self',
+                    'justify_content',
+                    'align_items',
+                    'align_content',
+                    'flex_grow',
+                    'flex_wrap',
+                   
+                    ),
+            'description': """these properties set the classes
+                            that bootstrap use to manage flexbox""",
+            'classes':('collapse',),
+            })
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ( 
         'name',
         'url', 
-        'navbar',
         )
     list_filter = (
         'name',
@@ -31,6 +105,8 @@ class PageAdmin(admin.ModelAdmin):
                     'name',
                     'title',
                     'description',
+                    'navbar',
+                    'footer',
                     ),
                 'description': """title and description refer 
                                 to the metadata of the HTML page
@@ -39,81 +115,13 @@ class PageAdmin(admin.ModelAdmin):
                                 purpose inside the site administration""",
             }
             ),
-        ('Components',
-            {
-                'fields':('footer','navbar',),
-                'description':"""indicate the two (or three, modals 
-                                should be added ) components that 
-                                can be inserted in a page"""
-            }
-        )
+     
         )
     
-
-class SectionAdmin(admin.ModelAdmin):
-    list_display = (
-                    'name',
-                    'order',
-        )
-    fieldsets = (
-        ('Section Properties',
-            {
-                'fields':('name','page',),
-                'description':"""the properties relative to the section"""
-            }
-        ),
-        ('CSS property',
-            {
-                'fields': (
-                        ('CSS_id','CSS_classes',),
-                        ('width','height',),
-                        ('padding','padding_sides',),
-                        ('margin','margin_sides',),
-                        'breakpoint',
-                        ('bg_image',
-                        'bg_color',
-                        'bg_gradient',
-                        'shadow',),
-                        'position',
-                        ('top',
-                        'left',
-                        'down',
-                        'right',),
-                        'order',
-                        'visibility',
-                        'display',
-                        ),
-                'description': """these properties set the classes
-                                that bootstrap use""",
-                'classes':('collapse',),
-            }
-            ),
-        ('Flex property',
-            {
-                'fields': ('direction',
-                        'justify_content',
-                        'align_items',
-                        'align_self',
-                        'align_content',
-                        'flex_grow',
-                        ),
-                'description': """these properties set the classes
-                                that bootstrap use to manage flexbox""",
-                'classes':('collapse',),
-            }
-            ),
-
-        )
-    list_filter = (
-        'name',
-        'page',
-        )
-
 
 class NavbarAdmin(admin.ModelAdmin):
     list_display = (
             '__str__',
-            'logo',
             'brand_name',
             'navbar_color',
             'placement',
@@ -126,6 +134,7 @@ class NavbarAdmin(admin.ModelAdmin):
                     'brand_name',
                     'navbar_color',
                     'placement',
+                    
                     ),
                 'description':"""the properties relative to the navbar"""
             }
@@ -162,65 +171,136 @@ class FooterAdmin(admin.ModelAdmin):
     )
 
 
-class ContainerAdmin(admin.ModelAdmin):
+class SectionAdmin(admin.ModelAdmin):
     list_display = (
                     'name',
+                    'page',
                     'order',
         )
     fieldsets = (
-        ('Container Properties',
+        ('Section properties',
             {
                 'fields':(
+                    'name', 
+                    'page',
+                )
+            }),
+            html_tags,
+        ('Sizes',
+            {
+            'fields':('height',),
+            'description':"sizes of the div, they refer to min viewports. leave height empty to make it adapt to content. the width is always set to 100",
+            'classes':('collapse','wide'),
+            }),      
+            spacing,
+            background,
+            position,
+            misc,
+            flex_properties,
+        )
+
+    list_filter = (
+        'name',
+        'page',
+        )
+    #exclude=('width',)
+
+class ContainerAdmin(admin.ModelAdmin):
+    list_display = (
                     'name',
                     'section',
-                    'texts',
-                    'images',
                     'order',
-                    ),
-                'description':"""the properties relative to the container"""
-            }
-        ),
-               ('CSS property',
-            {
+        )
+    fieldsets = (
+            ('Container Properties',
+                {
+                    'fields':(
+                        'name',
+                        'section',
+                        'texts',
+                        'images',
+                        'link',
+                        ),
+                    'description':"""the properties relative to the container
+                                        the sections it belongs to
+                                        and the content it contain"""
+                }),
+            ('HTML tags',
+                {
                 'fields': (
                         ('CSS_id','CSS_classes',),
-                        ('width','height',),
+                        ),
+                'description': """these properties set the HTML tags""",
+                'classes':('collapse',),
+                }),
+            ('Sizes',
+                {
+                'fields':(('height',),),
+                'description':"sizes of the div, they refer to min viewports. leave height empty to make it adapt to content. the width is always set to 100",
+                'classes':('collapse','wide'),
+                }),
+            ('Spacing',
+                {
+                'fields':(
                         ('padding','padding_sides',),
                         ('margin','margin_sides',),
-                        'breakpoint',
-                        ('bg_image',
+                        ),
+                'description':"padding and margins",
+                'classes':('collapse',),
+                }),
+            ('Background',
+                {
+                'fields': (
+                        'bg_image',
                         'bg_color',
                         'bg_gradient',
-                        'shadow',),
+                        'shadow',
+                        ),
+                'description':"background properties",
+                'classes':('collapse',),                        
+                }),
+            ('Position',
+                {
+                'fields':(
+                        'order',
                         'position',
                         ('top',
                         'left',
                         'down',
                         'right',),
-                        'visibility',
-                        'display',
                         ),
-                'description': """these properties set the classes
-                                that bootstrap use""",
+                'description':"positioning",
                 'classes':('collapse',),
-            }
-            ),
-        ('Flex property',
-            {
-                'fields': ('direction',
+                }),
+            ('Misc',
+                {
+                'fields':
+                        ('breakpoint',
+                        'visibility',
+                        ('display',
+                        'inline',),
+                        ),
+                'description':"miscellaneous properties, breakpoint refer to the flex direction",
+                'classes':('collapse',),
+                }),
+            ('Flex properties',
+                {
+                'fields': (
+                        'direction',
+                        'align_self',
                         'justify_content',
                         'align_items',
-                        'align_self',
                         'align_content',
                         'flex_grow',
+                        'flex_wrap',
+                    
                         ),
                 'description': """these properties set the classes
                                 that bootstrap use to manage flexbox""",
                 'classes':('collapse',),
-            }
-            ),
+                }),
+            )
 
-        )
     list_filter = (
         'name',
         'section',
@@ -231,8 +311,7 @@ class ContainerAdmin(admin.ModelAdmin):
 class OverlayAdmin(admin.ModelAdmin):
     list_display = (
             #should be added a bg
-            'container',
-            'section',
+           '__str__',
         )
     fieldsets = (
         ('Overlay Properties',
@@ -275,7 +354,8 @@ class OverlayAdmin(admin.ModelAdmin):
             ),
         )
     list_filter = (
-        'container',
+        'containers',
+        'sections',
         
         )
 
@@ -291,50 +371,72 @@ class LinkAdmin(admin.ModelAdmin):
             {
                 'fields':(  'toPage',
                             'textShown',
-                            'container', 
-                            'overlay',
                             'stretched_link',
                             ),
                 'description':"""the properties relative to the Link"""
             }
             ),
-        ('CSS property',
-            {
+        ('HTML tags',
+                {
                 'fields': (
                         ('CSS_id','CSS_classes',),
-                        'breakpoint',
-                        ('bg_image',
-                        'bg_color',
-                        'bg_gradient',
-                        'shadow',),
-                        'position',
-                        ('top',
-                        'left',
-                        'down',
-                        'right',),
-                        'order',
-                        'visibility',
-                        'display',
                         ),
-                'description': """these properties set the classes
-                                that bootstrap use""",
+                'description': """these properties set the HTML tags""",
                 'classes':('collapse',),
-            }
-            ),
-        ('Flex property',
+                }
+        ),
+        ('Background',
             {
-                'fields': ('direction',
-                        'justify_content',
-                        'align_items',
-                        'align_self',
-                        'align_content',
-                        'flex_grow',
-                        ),
-                'description': """these properties set the classes
-                                that bootstrap use to manage flexbox""",
-                'classes':('collapse',),
-            }
-            ),
+            'fields': (
+                    'bg_image',
+                    'bg_color',
+                    'bg_gradient',
+                    'shadow',
+                    ),
+            'description':"background properties",
+            'classes':('collapse',),                        
+            }),
+        ('Position',
+            {
+            'fields':(
+                    'order',
+                    'position',
+                    ('top',
+                    'left',
+                    'down',
+                    'right',),
+                    ),
+            'description':"positioning",
+            'classes':('collapse',),
+            }),
+        ('Misc',
+            {
+            'fields':
+                    ('breakpoint',
+                    'visibility',
+                    ('display',
+                    'inline',),
+                    ),
+            'description':"miscellaneous properties, breakpoint refer to the flex direction",
+            'classes':('collapse',),
+            }),
+        ('Flex properties',
+            {
+            'fields': (
+                    'direction',
+                    'align_self',
+                    'justify_content',
+                    'align_items',
+                    'align_content',
+                    'flex_grow',
+                    'flex_wrap',
+                
+                    ),
+            'description': """these properties set the classes
+                            that bootstrap use to manage flexbox""",
+            'classes':('collapse',),
+            }),
+        
         )
 
 
@@ -413,26 +515,28 @@ class ImageAdmin(admin.ModelAdmin):
                         ('width','height',),
                         ('padding','padding_sides',),
                         ('margin','margin_sides',),
-                        'breakpoint',
-                        ('bg_image',
-                        'bg_color',
-                        'bg_gradient',
-                        'shadow',),
-                        'position',
-                        ('top',
-                        'left',
-                        'down',
-                        'right',),
-                        'order',
-                        'visibility',
-                        'display',
+                                                
                         ),
                 'description': """these properties set the classes
                                 that bootstrap use""",
                 'classes':('collapse',),
             }
             ),
+        ('Default image',
+            {
+                'fields': (
+                    ('bg_image','bg_color','bg_gradient','shadow',),
+                    ('visibility',),
+                    ),
+                'description':""" the default image or color that the img tag
+                                refer to when the resource cant be found and other things
+                                """,
+                'classes':('collapse',),
+            }
+            ),
         )
+  
+    
 
     def image_tag(self,obj):
         return format_html('<img src="{0}" style="height:200px;" />'.format(obj.url.url))

@@ -1,14 +1,22 @@
 
 from django.db import models
 from ..abstract.abstract import Flex
-
-
+from ..content.image import Image
+"""
+Navbar component model it is rendered with a <nav>
+one navbar can be 
+"""
 class Navbar(Flex):
 
     ##logo
     #optional image inside the navbar-brand
     #div
-    logo = models.ImageField(upload_to='', null=True, blank=True)
+    logo = models.ForeignKey(
+        Image, 
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        )
     ##nome brand
     #it refer to the element with the class
     #'navbar-brand'

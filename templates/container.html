@@ -4,11 +4,8 @@
     <div 
             id = "{{ container.CSS_id }}"
             class="
-             container
+                container
                 {{ container.CSS_classes }}
-
-                mw-{{ container.width }}
-                mh-{{ container.height }}
                 
                 p{{ container.padding_sides }}{{ container.padding }}
                 m{{ container.margin_sides }}{{ container.margin }}
@@ -27,7 +24,8 @@
                     end-{{ container.right }}
                 {% endif %}
 
-                flex{{ container.breakpoint }}-{{ container.direction }} 
+                flex-{{ container.direction }} 
+                {{ container.breakpoint }}
                 {{ container.order}}
                 flex{{ container.flex_wrap }}
                 justify-content{{ container.justify_content }}
@@ -37,6 +35,10 @@
 
                 align-self{{ container.align_self }}
                 
+                "
+                style="
+                    max-height:{{ container.height }}%;
+                    max-width:{{ container.width }}%;
                 "
     {% if container.bg_image != '' %}
     style="  
@@ -54,11 +56,13 @@
         {% endblock %}
     {% endfor%}
 
-    {% for link in container.link_set.all %}
+    {% if container.link %}
+    {% with container.link as link %}
         {% block Link %}
             {% include 'link.html' %}
         {% endblock %}
-    {% endfor %}
+    {% endwith %}
+    {% endif %}
 
     {% if container.orderedContent %}
         {% for content in container.orderedContent %}

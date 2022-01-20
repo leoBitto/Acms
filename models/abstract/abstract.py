@@ -22,12 +22,12 @@ class CSS(models.Model):
     width = models.IntegerField( 
         blank=True, 
         null=True,
-        default=100,
+        default=None,
         )
     height = models.IntegerField(
         blank=True, 
         null=True,
-        default=100,
+        default=None,
         )
     
     #Spacing
@@ -58,7 +58,7 @@ class CSS(models.Model):
         max_length=5, 
         blank=True, 
         null=True,
-        default='-auto'
+        default=''
         )
     margin_sides = models.CharField(
         choices=[
@@ -87,7 +87,7 @@ class CSS(models.Model):
         max_length=5,
         blank=True, 
         null=True,
-        default='-auto'
+        default=''
         )
     
     #breakpoint
@@ -100,10 +100,11 @@ class CSS(models.Model):
             ('-xl','xl'),
             ('-xxl','xxl'),
             ('-fluid','fluid'),
-            ('', 'no breakpoint')
+            (None, 'no breakpoint')
         ],
-        default='',
-        blank=True,
+        default=None,
+        blank=False,
+        null=True,
         help_text="breakpoint work from the point indicated forward meaning that the content is 100percent until the breakpoint"
         )
     
@@ -167,7 +168,7 @@ class CSS(models.Model):
                             ('position-absolute', 'absolute'),
                             ('position-fixed', 'fixed'),
                             ('position-sticky', 'sticky'),
-                            
+                            ('','no specified position'),
                             ],
                     blank=True, 
                     max_length=20,
@@ -208,9 +209,9 @@ class CSS(models.Model):
             ('order-5','5'),
             ('','no order'),
         ],
-        blank=True, 
+        blank=False, 
         default='order-0',
-        max_length=20,
+        max_length=10,
         )
     align_self = models.CharField(
         max_length=10,
@@ -220,9 +221,10 @@ class CSS(models.Model):
             ('-end','end'),
             ('-baseline','baseline'),
             ('-stretch','stretch'),
+            ('','no value'),
         ],
         default='',
-        blank=True,
+        blank=False,
         help_text="""
             align the item on the
             vertical axis in a flex container
@@ -250,8 +252,8 @@ class CSS(models.Model):
             ('-flex','flex'),
             ],
         max_length=50,
-        blank=True, 
-        default="",
+        blank=False, 
+        default="-flex",
         )
 
     class Meta:
@@ -259,6 +261,7 @@ class CSS(models.Model):
 
 
 class Flex(CSS):
+    
     inline = models.CharField(
         choices=[
             ('','not inline'),

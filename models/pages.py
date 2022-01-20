@@ -10,9 +10,20 @@ class Page(models.Model):
     
     url = models.CharField(blank=True, max_length=100, unique=True)
     name = models.CharField(blank=True, null=True, default=url, max_length=100, unique=True)
-    
-    navbar = models.ForeignKey(Navbar, on_delete=models.SET_NULL, null=True,  blank=True,)
-    footer = models.ForeignKey(Footer, on_delete=models.SET_NULL, null=True, blank=True,)
+
+    navbar = models.ForeignKey(
+        Navbar,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        )
+
+    footer = models.ForeignKey(
+        Footer,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        )
 
     description = models.TextField(
         blank=True,

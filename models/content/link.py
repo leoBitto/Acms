@@ -2,9 +2,7 @@ from django.db import models
 
 from ..abstract.abstract import CSS, Flex
 from ..pages import Page
-from ..content.text import Text
-from ..layout.layout import Container, Section
-from .overlay import Overlay
+from .text import Text
 
 class Link(Flex):
     width = 100
@@ -23,18 +21,7 @@ class Link(Flex):
         blank=True,
         null=True,
         )
-    container = models.ForeignKey(
-        Container,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        )
-    overlay = models.ForeignKey(
-        Overlay,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        )
+
     stretched_link = models.CharField(
         choices=[
             ('','not stretched'),
@@ -48,7 +35,6 @@ class Link(Flex):
     @property
     def getLink(self):
         return 'Acms:' + self.toPage.url
-         
 
     def __str__(self):
         return "Link to " + self.toPage.name

@@ -1,7 +1,7 @@
 from django.db import models
 from ..abstract.abstract import Flex
 
-from ..layout.layout import Container, Section
+from ..layout.container import Container, Section
 
 class Overlay(Flex):
     ## da mettere nei template
@@ -14,17 +14,13 @@ class Overlay(Flex):
     # left = 0
     # down = 0
     # right = 0
-    container = models.ForeignKey(
+    containers = models.ManyToManyField(
         Container,
-        on_delete=models.CASCADE,
         blank=True,
-        null=True,
         )
-    section = models.ForeignKey(
+    sections = models.ManyToManyField(
         Section,
-        on_delete=models.CASCADE,
         blank=True,
-        null=True,
         )
 
 

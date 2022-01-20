@@ -1,30 +1,36 @@
 from django.db import models
 
 from ..abstract.abstract import Flex
-from ..pages import Page
+from ..layout.section import Section
 from ..content.image import Image
 from ..content.text import Text
+from ..content.link import Link
+"""
+Container have .content inside, they are the most generic 
+grouping object. 
+they belong to only one section and this is because otherwise
+the orderparameter cant be used to organize the containers 
+inside a section. 
 
-class Section(Flex):
-    #every section group the containers, 
-    #the sections can be ordered
+it can point to many types of content with ManyToMany like :
+    .text
+    .images
+    .links, the cover the entire container making it cliccable
+pointing to the section is done with ForeignKey 
 
-    name = models.CharField(max_length=100, null=True)
-    page = models.ManyToManyField(Page)
-    
-    
-    def __str__(self):
-        return self.name  
-
-
+"""
 class Container(Flex):
+
     name = models.CharField(
         null=True, 
         blank=True, 
         max_length=100,
         )
-    section = models.ManyToManyField(
-        Section, 
+    section = models.ForeignKey(
+        Section,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL, 
         )
     texts = models.ManyToManyField(
         Text,
@@ -34,6 +40,15 @@ class Container(Flex):
         Image,
         blank=True, 
         )
+    link = models.ForeignKey(
+        Link,
+        blank=True, 
+        null=True,
+        on_delete=models.SET_NULL,
+        )
+    col= models.CharField(null=True, 
+        blank=True, 
+        max_length=100,)
 
     @property
     def orderedContent(self):
@@ -56,6 +71,6 @@ class Container(Flex):
         ordering=['order']
 
     def __str__(self):
-        return 'Container' + self.name
+        return 'Container ' + self.name
 
 

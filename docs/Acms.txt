@@ -8,6 +8,22 @@ bootstrap 5.0 a graphic interface to facilitate
 the display of content in an html page
 its implementation follow the bootstrap 5.0 docs
 https://getbootstrap.com/docs/5.0
+the idea is to create pages that are pointed by a series 
+of Sections,<div> tags, that organize Containers, <div> tags
+that have the 'container' class of bootstrap, they contain
+"content" whether it is Text<p>, Images<img>, Canvas<canvas>,
+Video<video> etc..
+there are also added a series of components that allow you
+to create HTML tags like <nav> and <footer> that refer to the
+page object(the base.html file) or <div> with particular set of
+attributes like Overlay, or special functionalities like 
+Carousel. The last two can be used within a Container and a 
+Section respectively.
+there is the possibility to extend the CSS files and add 
+JS functionality to the page thanks to the fact that every 
+object derive from the class CSS at least so they all have an
+id tag and Css and Js files can be added in the db.
+
 
 ########### ROADMAP OF IMPLEMENTATION #####################
 #layout
@@ -194,7 +210,7 @@ layout                  Col;
 layout                      Container
 pages                                Section
 components          Overlay
-components/navbar   Navbar
+components/navbar   Navbar Footer
 
 ##CSS
     is an ABSTRACT class containing all the parameters that
@@ -214,16 +230,24 @@ components/navbar   Navbar
 
 ##Section
     every section group every other layout block
-    wether it is a grid(row+cols) or a goups of
-    container etc...
+    wether it is a grid(row+cols) or a goups of container etc...
     the sections can be ordered
     ALL THE SECTIONS ARE STACKED VERTICALLY
-    AND SPAN THE ENTIRE VIEW-WIDTH AND VIEW-HEIGHT 
-    the sections contain groups of container to avoid using
-    rows and columns that display containers orizontaly 
-    and vertically respectively while the section can 
-    have content both vertical and orizontal. 
+    AND SPAN THE ENTIRE VIEW-WIDTH AND can span the 
+    entire VIEW-HEIGHT(set 100 for the height parameter) or
+    adjust to the containers it have (leave blank)
+    the sections contain groups of container, the section can 
+    organize containers both vertically and orizontally. 
+    depending from the display direction parameter when the 
+    display parameter is set to flex. it is preferable to use
+    flex functionalities to position content in the sections
+    the breakpoint parameter is set to function when the 
+    display direction parameter is set to row, it make the 
+    content disposed in a column at the breakpoint and up
     WE SHOULD AIM TO MINIMIZE THE NUMBER OF SectionS PER PAGE
+    sections point to pages with ForeignKey creating a 
+    one to many relationship, one Page, many Sections.
+    every sections point to one page.
 
 ##Container 
     allow to group content wether it is text, images, 
@@ -231,7 +255,8 @@ components/navbar   Navbar
     containers can be used like thumbnails or 
     stacked orizontally to create two "columns" 
     containing a series of content stacked vertically
-    obtaining a "mosaic grid"
+    obtaining a "mosaic grid".
+
     otherway to insert a proper grid :
 
 ##Grid
@@ -241,6 +266,7 @@ components/navbar   Navbar
 
 ##Navbar
     
+##Footer
 
 ##CONTENTS
 ###Text

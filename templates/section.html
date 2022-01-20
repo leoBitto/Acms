@@ -25,8 +25,12 @@
                     bottom-{{ section.down }}
                     end-{{ section.right }}
                 {% endif %}
-
-                flex{{ section.breakpoint }}-{{ section.direction }} 
+                {% if section.direction == 'row' %}
+                    flex-column
+                    flex{{ section.breakpoint }}-row
+                {% else %}
+                    flex-{{ section.direction }} 
+                {% endif %}
                 {{section.order}}
                 flex{{ section.flex_wrap }}
                 justify-content{{ section.justify_content }}
@@ -37,6 +41,9 @@
                 align-self{{ section.align_self }}
                 
                 "
+            style = "
+                
+            "
     {% if section.bg_image != '' %}
     style="  
         background-image: url('{{section.bg_image.url}}'); 
