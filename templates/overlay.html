@@ -6,26 +6,24 @@
                 overlay
                 {{ overlay.CSS_classes }}
 
-                mw-{{ overlay.width }}
-                mh-{{ overlay.height }}
+                w-100
+                h-100
                 
                 p{{ overlay.padding_sides }}{{ overlay.padding }}
-                m{{ overlay.margin_sides }}{{ overlay.margin }}
 
                 {{ overlay.bg_color }}{{ overlay.bg_gradient }}
                 {{ overlay.shadow }}
 
-                d{{ overlay.display }}{{ overlay.inline }}
+                d-flex{{ overlay.inline }}
                 {{ overlay.visibility }}
 
-                {{ overlay.position }}
-                {% if overlay.position == 'position-absolute' %}
-                    top-{{ overlay.top }}
-                    start-{{ overlay.left }}
-                    bottom-{{ overlay.down }}
-                    end-{{ overlay.right }}
-                {% endif %}
+                position-absolute
 
+                top-0
+                start-0
+                bottom-0
+                end-0
+                opacity{{ overlay.opacity }}
                 flex{{ overlay.breakpoint }}-{{ overlay.direction }} 
                 {{overlay.order}}
                 flex{{ overlay.flex_wrap }}
@@ -37,21 +35,26 @@
                 align-self{{ overlay.align_self }}
                 
                 "
+    style=" 
     {% if overlay.bg_image != '' %}
-    style="  
+     
         background-image: url('{{overlay.bg_image.url}}'); 
         background-position: center; 
         background-repeat: no-repeat; 
         background-size: cover; 
+     {% endif %}
+        z-index:{{overlay.level}};
     "
-    {% endif %}
-            style="z-index:5000"
+   
+
         >
 
-        {% for link in overlay.link_set.all %}
+        {% if overlay.link %}
+        {% with overlay.link as link %}
             {% block Link %}
                 {% include 'link.html' %}
             {% endblock %}
-        {% endfor %}
+        {% endwith %}
+        {% endif %}
     </div>
 {% endblock %}

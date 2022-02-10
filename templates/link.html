@@ -49,9 +49,25 @@
             href="{% url link.getLink  %}"
         >
             {% with link.textShown as text %}
-            {% block Text %}
-                {% include 'text.html' %}
-            {% endblock %}
+        
+                <p class="
+                    d-flex
+                    align-content-center 
+                    justify-content-center
+                    text{{ text.color }}
+                    text{{ text.alignment }}
+                    fs{{ text.size }}
+                    fw{{ text.weight }}
+                    fst{{ text.italics }}
+                    lh{{ text.line_height }}
+                    text-decoration{{ text.text_decoration }}
+                    align{{ text.vertical_align }}
+                    overflow{{ text.overflow }}
+                ">
+                
+                    {{ text.txt }} 
+                </p>
+               
             {% endwith %}
         </a>
 

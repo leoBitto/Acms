@@ -34,7 +34,7 @@ class Link(Flex):
 
     @property
     def getLink(self):
-        return 'Acms:' + self.toPage.url
+        return 'Acms:' + self.toPage.name
 
     def __str__(self):
         return "Link to " + self.toPage.name

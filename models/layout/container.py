@@ -1,10 +1,13 @@
-from django.db import models
+############################################################
+############################################################
 
-from ..abstract.abstract import Flex
-from ..layout.section import Section
-from ..content.image import Image
-from ..content.text import Text
-from ..content.link import Link
+##     model name: Container                    
+##     superclass: Flex
+##     subclass:   
+##     points to: Section, Text,Image,Link
+##     abstract: No
+
+##     description:
 """
 Container have .content inside, they are the most generic 
 grouping object. 
@@ -13,12 +16,50 @@ the orderparameter cant be used to organize the containers
 inside a section. 
 
 it can point to many types of content with ManyToMany like :
-    .text
-    .images
+    .text, various text can be aggregated in a container. 
+            useful for articles
+    .images, its advised to use only one image per container
+            the container should be dedicated to that image only
     .links, the cover the entire container making it cliccable
 pointing to the section is done with ForeignKey 
 
+IMages can be added also as backgrounds
+
 """
+
+##     parameters:
+#           +CSS
+#           +Flex 
+#           name
+#           section
+#           texts
+#           images
+#           link
+#           
+
+##       methods:
+#           __str__
+#           orderedContent
+
+####    Admin stuff
+
+##    fixed CSS-Flex parameters:
+
+
+##    ignored in admin param:
+
+
+
+############################################################
+############################################################
+from django.db import models
+
+from ..abstract.abstract import Flex
+from ..layout.section import Section
+from ..content.image import Image
+from ..content.text import Text
+from ..content.link import Link
+
 class Container(Flex):
 
     name = models.CharField(
@@ -46,9 +87,6 @@ class Container(Flex):
         null=True,
         on_delete=models.SET_NULL,
         )
-    col= models.CharField(null=True, 
-        blank=True, 
-        max_length=100,)
 
     @property
     def orderedContent(self):

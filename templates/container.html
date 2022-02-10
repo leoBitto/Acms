@@ -40,14 +40,14 @@
                     max-height:{{ container.height }}%;
                     max-width:{{ container.width }}%;
                 "
-    {% if container.bg_image != '' %}
-    style="  
-        background-image: url('{{ container.bg_image.url }}'); 
-        background-position: center; 
-        background-repeat: no-repeat; 
-        background-size: cover; 
-    "
-    {% endif %}
+                {% if container.bg_image != '' %}
+                style="  
+                    background-image: url('{{ container.bg_image.url }}'); 
+                    background-position: center; 
+                    background-repeat: no-repeat; 
+                    background-size: cover; 
+                "
+                {% endif %}
     >
 
      {% for overlay in container.overlay_set.all %}
@@ -71,12 +71,68 @@
 
                 {% if modelclass == "Text" %}
                 {% with content as text %}
-                    {% include 'text.html' %}
+                    <p class="
+                        d-flex
+                        align-content-center 
+                        justify-content-center
+                        text{{ text.color }}
+                        text{{ text.alignment }}
+                        fs{{ text.size }}
+                        fw{{ text.weight }}
+                        fst{{ text.italics }}
+                        lh{{ text.line_height }}
+                        text-decoration{{ text.text_decoration }}
+                        align{{ text.vertical_align }}
+                        overflow{{ text.overflow }}
+                    ">
+                    
+                        {{ text.txt }} 
+                    </p>
                 {% endwith %}
 
                 {% elif modelclass == "Image" %}
                 {% with content as image %}
-                    {% include 'image.html' %}
+                     <img  
+                
+                        id = "{{ image.CSS_id }}"
+                        class="
+                            col{{ image.col }}
+                            img-fluid
+                            {{ image.CSS_classes }} 
+                            p{{ image.padding_sides }}{{ image.padding }}
+                            m{{ image.margin_sides }}{{ image.margin }}
+                            {{ image.bg_color }}{{ image.bg_gradient }}
+                            {{ image.shadow }}
+                            d{{ image.display }}{{ image.inline }}
+                            {{ image.visibility }}
+                            {{ image.position }}
+                            {% if image.position == 'position-absolute' %}
+                                top-{{ image.top }}
+                                start-{{ image.left }}
+                                bottom-{{ image.down }}
+                                end-{{ image.right }}
+                            {% endif %}
+                            {{image.order}}
+                            flex-grow-1
+
+                            align-self{{ image.align_self }}
+                            "
+                        
+                        {% if image.bg_image != '' %}
+                        style="  
+                            background-image: url('{{image.bg_image.url}}'); 
+                            background-position: center; 
+                            background-repeat: no-repeat; 
+                            background-size: cover; 
+                            "
+                        {% endif %}
+
+                        src="/media/{{ image.url }}"
+                        style = "
+                            max-height:{{ image.height }}%;
+                            max-width:{{ image.width }}%;
+                            "
+                            >
                 {% endwith %}
 
                 {% endif %}

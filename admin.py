@@ -1,3 +1,4 @@
+from audioop import reverse
 from django.contrib import admin
 from django.utils.html import format_html
 
@@ -12,16 +13,16 @@ from .models.components.footer import Footer
 from .models.components.overlay import Overlay
 
 html_tags =('HTML tags',
-                {'fields': (
-                        ('CSS_id','CSS_classes',),
-                        ),
-                'description': """these properties set the HTML tags""",
-                'classes':('collapse',),
-                }
-    )
+            {
+            'fields': (
+                    ('CSS_id','CSS_classes',),
+                    ),
+            'description': """these properties set the HTML tags""",
+            'classes':('collapse',),
+            })
 sizes= ('Sizes',
             {
-            'fields':(('height','width'),),
+            'fields':(('height','width'), 'col'),
             'description':"sizes of the div, they refer to min viewports. leave height empty to make it adapt to content. the width is always set to 100",
             'classes':('collapse','wide'),
             })
@@ -63,6 +64,7 @@ misc=('Misc',
             'fields':
                     ('breakpoint',
                     'visibility',
+                    'opacity',
                     ('display',
                      'inline',),
                      ),
@@ -90,7 +92,10 @@ class PageAdmin(admin.ModelAdmin):
     list_display = ( 
         'name',
         'url', 
+        'navbar',
+        'footer',
         )
+    
     list_filter = (
         'name',
         )
@@ -117,7 +122,7 @@ class PageAdmin(admin.ModelAdmin):
             ),
      
         )
-    
+
 
 class NavbarAdmin(admin.ModelAdmin):
     list_display = (
@@ -178,7 +183,7 @@ class SectionAdmin(admin.ModelAdmin):
                     'order',
         )
     fieldsets = (
-        ('Section properties',
+            ('Section properties',
             {
                 'fields':(
                     'name', 
@@ -186,16 +191,24 @@ class SectionAdmin(admin.ModelAdmin):
                 )
             }),
             html_tags,
-        ('Sizes',
-            {
-            'fields':('height',),
-            'description':"sizes of the div, they refer to min viewports. leave height empty to make it adapt to content. the width is always set to 100",
-            'classes':('collapse','wide'),
-            }),      
+            ('Sizes',
+                {
+                'fields':('height',),
+                'description':"height of the section, they refer to min viewports. leave height empty to make it adapt to content, make it 100 to make it span all the viewport. the width is always set to 100",
+                'classes':('collapse','wide'),
+                }),      
             spacing,
             background,
-            position,
-            misc,
+            ('Misc',
+                {
+                'fields':
+                        ('breakpoint',
+                        'visibility',
+                        'inline',
+                        ),
+                'description':"breakpoint refer to the flex direction, display is flex.",
+                'classes':('collapse',),
+                }),
             flex_properties,
         )
 
@@ -203,7 +216,7 @@ class SectionAdmin(admin.ModelAdmin):
         'name',
         'page',
         )
-    #exclude=('width',)
+    
 
 class ContainerAdmin(admin.ModelAdmin):
     list_display = (
@@ -225,80 +238,13 @@ class ContainerAdmin(admin.ModelAdmin):
                                         the sections it belongs to
                                         and the content it contain"""
                 }),
-            ('HTML tags',
-                {
-                'fields': (
-                        ('CSS_id','CSS_classes',),
-                        ),
-                'description': """these properties set the HTML tags""",
-                'classes':('collapse',),
-                }),
-            ('Sizes',
-                {
-                'fields':(('height',),),
-                'description':"sizes of the div, they refer to min viewports. leave height empty to make it adapt to content. the width is always set to 100",
-                'classes':('collapse','wide'),
-                }),
-            ('Spacing',
-                {
-                'fields':(
-                        ('padding','padding_sides',),
-                        ('margin','margin_sides',),
-                        ),
-                'description':"padding and margins",
-                'classes':('collapse',),
-                }),
-            ('Background',
-                {
-                'fields': (
-                        'bg_image',
-                        'bg_color',
-                        'bg_gradient',
-                        'shadow',
-                        ),
-                'description':"background properties",
-                'classes':('collapse',),                        
-                }),
-            ('Position',
-                {
-                'fields':(
-                        'order',
-                        'position',
-                        ('top',
-                        'left',
-                        'down',
-                        'right',),
-                        ),
-                'description':"positioning",
-                'classes':('collapse',),
-                }),
-            ('Misc',
-                {
-                'fields':
-                        ('breakpoint',
-                        'visibility',
-                        ('display',
-                        'inline',),
-                        ),
-                'description':"miscellaneous properties, breakpoint refer to the flex direction",
-                'classes':('collapse',),
-                }),
-            ('Flex properties',
-                {
-                'fields': (
-                        'direction',
-                        'align_self',
-                        'justify_content',
-                        'align_items',
-                        'align_content',
-                        'flex_grow',
-                        'flex_wrap',
-                    
-                        ),
-                'description': """these properties set the classes
-                                that bootstrap use to manage flexbox""",
-                'classes':('collapse',),
-                }),
+            html_tags,
+            sizes,
+            spacing,
+            background,
+            position,
+            misc,
+            flex_properties,
             )
 
     list_filter = (
@@ -312,51 +258,41 @@ class OverlayAdmin(admin.ModelAdmin):
     list_display = (
             #should be added a bg
            '__str__',
+           'level',
         )
     fieldsets = (
         ('Overlay Properties',
             {
-                'fields':('container', 'section',),
+                'fields':('containers', 'sections', 'link', 'level'),
                 'description':"""the properties relative to the Overlay"""
             }
             ),
-        ('CSS property',
+        html_tags,
+       ('Spacing',
             {
-                'fields': (
-                        ('CSS_id','CSS_classes',),
-                        'breakpoint',
-                        'position',
-                        ('bg_image',
-                        'bg_color',
-                        'bg_gradient',
-                        'shadow',),
-                        'visibility',
-                        'display',
-                        ),
-                'description': """these properties set the classes
-                                that bootstrap use""",
-                'classes':('collapse',),
-            }
-            ),
-        ('Flex property',
+            'fields':(
+                    ('padding','padding_sides',),
+                    ),
+            'description':"padding and margins",
+            'classes':('collapse',),
+            }),
+        background,
+        ('Misc',
             {
-                'fields': ('direction',
-                        'justify_content',
-                        'align_items',
-                        'align_self',
-                        'align_content',
-                        'flex_grow',
-                        ),
-                'description': """these properties set the classes
-                                that bootstrap use to manage flexbox""",
-                'classes':('collapse',),
-            }
-            ),
+            'fields':
+                    (
+                    'visibility',
+                    'opacity',
+                    'inline',
+                     ),
+            'description':"miscellaneous properties, breakpoint refer to the flex direction",
+            'classes':('collapse',),
+            }),
+        flex_properties,
         )
     list_filter = (
         'containers',
         'sections',
-        
         )
 
 
@@ -496,32 +432,21 @@ class TextAdmin(admin.ModelAdmin):
 class ImageAdmin(admin.ModelAdmin):
     list_display = (
                     'id', 
-                    'url', 
+                    #'url', 
                     'author', 
                     'creation_date', 
                     'image_tag',
                     )
     fieldsets = (
-        ('Overlay Properties',
+        ('Image Properties',
             {
                 'fields':('url', 'author',),
                 'description':"""the properties relative to the Image css"""
             }
             ),
-        ('CSS property',
-            {
-                'fields': (
-                        ('CSS_id','CSS_classes',),
-                        ('width','height',),
-                        ('padding','padding_sides',),
-                        ('margin','margin_sides',),
-                                                
-                        ),
-                'description': """these properties set the classes
-                                that bootstrap use""",
-                'classes':('collapse',),
-            }
-            ),
+        html_tags,
+        spacing,
+        sizes,
         ('Default image',
             {
                 'fields': (

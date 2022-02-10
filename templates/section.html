@@ -6,7 +6,7 @@
                 section
                 {{ section.CSS_classes }}
 
-                min-vw-{{ section.width }}
+                min-vw-100
                 min-vh-{{ section.height }}
                 
                 p{{ section.padding_sides }}{{ section.padding }}
@@ -15,23 +15,12 @@
                 {{ section.bg_color }}{{ section.bg_gradient }}
                 {{ section.shadow }}
 
-                d{{ section.display }}{{ section.inline }}
+                d-flex{{ section.inline }}
                 {{ section.visibility }}
 
-                {{ section.position }}
-                {% if section.position == 'position-absolute' %}
-                    top-{{ section.top }}
-                    start-{{ section.left }}
-                    bottom-{{ section.down }}
-                    end-{{ section.right }}
-                {% endif %}
-                {% if section.direction == 'row' %}
-                    flex-column
-                    flex{{ section.breakpoint }}-row
-                {% else %}
-                    flex-{{ section.direction }} 
-                {% endif %}
-                {{section.order}}
+                flex-column
+                flex{{ section.breakpoint }}-row
+                {{ section.order }}
                 flex{{ section.flex_wrap }}
                 justify-content{{ section.justify_content }}
                 align-items{{ section.align_items }}
@@ -56,7 +45,14 @@
     
     {# in here the will be alist of all the graphical components that can point to a section #}
     {# just a bunch of components should point to a section #}
-        
+
+    {# overlay #}
+    {% for overlay in section.overlay_set.all %}
+        {% block overlay %}
+            {% include 'overlay.html' %}
+        {% endblock %}
+    {% endfor %}
+
     {# containters #}
     {% for container in section.container_set.all|dictsort:"order" %}
         {% block container %}

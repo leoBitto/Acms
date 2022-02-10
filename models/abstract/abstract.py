@@ -1,3 +1,71 @@
+############################################################
+############################################################
+
+##     model name: CSS                    
+##     superclass: models.Model
+##     subclass:   
+#           Flex
+##     points to:
+##     abstract: Yes 
+
+##     description:
+#            it have a lot the caracteristics that bootstrap5
+#            allow to control plus strings to add custom 
+#            classes and id to objects displayed
+#           
+#           
+#            
+#           
+#            
+#           
+
+##     parameters:
+#           CSS_id
+    #       CSS_classes
+    #       width
+    #       height    
+    #       col
+
+    #       padding_sides
+    #       padding 
+    #       margin_sides
+    #       margin
+    
+    #       breakpoint
+    #       bg_image
+    #       bg_color
+    #       bg_gradient
+    
+    #       borders to be implemented..
+
+    #       shadows
+    #       position
+    #       top 
+    #       left
+    #       down 
+    #       right 
+    #       order 
+    #       align_self 
+    #       visibility
+    #       display     
+    
+##       methods:
+#           
+
+####    Admin stuff
+
+##    set of params:
+#           html_tags
+#           sizes
+#           spacing
+#           background
+#           position
+#           misc
+#                 
+
+
+############################################################
+############################################################
 from django.db import models
 
 
@@ -19,17 +87,41 @@ class CSS(models.Model):
     # the blocks that are rendered need to inherit from
     # this class
     #sizing
-    width = models.IntegerField( 
+    width = models.CharField( 
         blank=True, 
         null=True,
-        default=None,
+        default='',
+        max_length=10,
         )
-    height = models.IntegerField(
+    height = models.CharField( 
         blank=True, 
         null=True,
-        default=None,
+        default='',
+        max_length=10,
         )
     
+    #bootstrap sizing
+    col = models.CharField(
+        choices=[
+            ('-1','1'),
+            ('-2','2'),
+            ('-3','3'),
+            ('-4','4'),
+            ('-5','5'),
+            ('-6','6'),
+            ('-7','7'),
+            ('-8','8'),
+            ('-9','9'),
+            ('-10','10'),
+            ('-11','11'),
+            ('-12','12'),
+        ],
+        max_length=3, 
+        blank=True, 
+        null=True,
+        default=''
+        )
+
     #Spacing
     padding_sides = models.CharField(
         choices=[
@@ -224,7 +316,7 @@ class CSS(models.Model):
             ('','no value'),
         ],
         default='',
-        blank=False,
+        blank=True,
         help_text="""
             align the item on the
             vertical axis in a flex container
@@ -242,7 +334,18 @@ class CSS(models.Model):
         blank=True,
         default='',
         )
-
+    opacity = models.CharField(
+        max_length=10,
+        choices=[
+            ('-0','0'),
+            ('-25','25'),
+            ('-50','50'),
+            ('-75','75'),
+            ('-100','100'),  
+        ],
+        default='',
+        blank=True,
+        )
     #display from utilities
     display = models.CharField(
         choices=[
@@ -258,6 +361,46 @@ class CSS(models.Model):
 
     class Meta:
         abstract = True
+
+
+############################################################
+############################################################
+
+##     model name: Flex                    
+##     superclass: CSS
+##     subclass:   
+#           Section
+##     points to:
+##     abstract: Yes 
+
+##     description:
+#            it have a lot the caracteristics that bootstrap5
+#            allow to control regardin the flex properties       
+#           
+
+##     parameters:
+#           +CSS
+#           inline
+#           direction
+#           flex-wrap
+#           justify-content
+#           align-items
+#           align-content
+#           flex-grow  
+    
+##       methods:
+#           
+
+####    Admin stuff
+
+##    set of params:
+#           flex_properties
+#           
+#
+
+
+############################################################
+############################################################
 
 
 class Flex(CSS):
@@ -349,7 +492,6 @@ class Flex(CSS):
             on the cross axis if there is space 
         """,
         )
-
     flex_grow = models.IntegerField(
         default=1,
         blank=True,
