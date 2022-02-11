@@ -43,7 +43,10 @@ class Button(CSS):
         max_length=10,
         blank=True,
     )
-
+    inside_text = models.CharField(
+        max_length=100,
+        blank=True,
+    )
 
     def __str__(self):
         return 'Overlay ' + self.name

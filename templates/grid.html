@@ -1,0 +1,27 @@
+{% load static %}
+{% block grid %}
+
+    <section class="
+                w-{{ grid.width }}
+                h-{{ grid.height }}
+                p{{ grid.padding }}
+                m{{ grid.margin }}
+                
+                "
+        style="
+             display: grid;
+             gap:{{ grid.gap }};  
+             grid-template-columns: repeat(auto-fit, minmax({{ grid.cell_min }}, 1fr))
+
+        "
+    >
+    
+    {% for container in grid.container_set.all %}
+        {% block container %}
+            {% include 'container.html' %}
+        {% endblock %}
+    {% endfor %}
+
+    </section>
+
+{% endblock grid %}

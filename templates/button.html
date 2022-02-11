@@ -1,0 +1,40 @@
+{% load static %}
+{% block button %}
+    <button type="button"
+            id = "{{ button.CSS_id }}"
+            class="
+                btn
+
+                {{ button.CSS_classes }}
+                
+                p{{ button.padding_sides }}{{ button.padding }}
+                m{{ button.margin_sides }}{{ button.margin }}
+
+                btn-{{ button.bg_color }}
+                {{ button.shadow }}
+
+                {{ button.visibility }}
+
+                {{ button.position }}
+                {% if button.position == 'position-absolute' %}
+                    top-{{ button.top }}
+                    start-{{ button.left }}
+                    bottom-{{ button.down }}
+                    end-{{ button.right }}
+                {% endif %}
+
+                {{ button.order}}
+
+                
+                "
+                style="
+                    max-height:{{ button.height }}%;
+                    max-width:{{ button.width }}%;
+                "
+                
+    >
+
+
+    </button>
+
+{% endblock button %}

@@ -61,6 +61,11 @@
     {% endfor %}
 
     {# grids #}
+    {% for grid in section.grid_set.all %}
+        {% block grid %}
+            {% include 'grid.html' %}
+        {% endblock %}
+    {% endfor %}
 
     {# etc... #}
 

@@ -56,6 +56,7 @@ from django.db import models
 
 from ..abstract.abstract import Flex
 from ..layout.section import Section
+from ..layout.grid import Grid
 from ..content.image import Image
 from ..content.text import Text
 from ..content.link import Link
@@ -67,12 +68,20 @@ class Container(Flex):
         blank=True, 
         max_length=100,
         )
+    # where a container can be
     section = models.ForeignKey(
         Section,
         blank=True,
         null=True,
         on_delete=models.SET_NULL, 
         )
+    grid = models.ForeignKey(
+        Grid,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL, 
+        )
+    # thing container can contain
     texts = models.ManyToManyField(
         Text,
         blank=True, 

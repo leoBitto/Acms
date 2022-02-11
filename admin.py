@@ -6,6 +6,7 @@ from .models.pages import Page
 from .models.content.image import Image
 from .models.content.text import Text
 from .models.layout.container import Container
+from .models.layout.grid import Grid
 from .models.layout.section import Section
 from .models.content.link import Link
 from .models.components.navbar import Navbar
@@ -216,12 +217,44 @@ class SectionAdmin(admin.ModelAdmin):
         'name',
         'page',
         )
-    
+
+
+class GridAdmin(admin.ModelAdmin):
+    list_display = (
+                    'name',
+                    'section',
+                    'order',
+        )
+    fieldsets = (
+            ('Grid Properties',
+                {
+                    'fields':(
+                        'name',
+                        'section',
+                        'gap',
+                        'cell_min',
+                        ),
+                    'description':"""the properties relative to the grid"""
+                }),
+            html_tags,
+            sizes,
+            spacing,
+           
+            misc,
+            )
+
+    list_filter = (
+        'name',
+        'section',
+       
+        )
+
 
 class ContainerAdmin(admin.ModelAdmin):
     list_display = (
                     'name',
                     'section',
+                    'grid',
                     'order',
         )
     fieldsets = (
@@ -230,6 +263,7 @@ class ContainerAdmin(admin.ModelAdmin):
                     'fields':(
                         'name',
                         'section',
+                        'grid',
                         'texts',
                         'images',
                         'link',
@@ -241,10 +275,8 @@ class ContainerAdmin(admin.ModelAdmin):
             html_tags,
             sizes,
             spacing,
-            background,
             position,
             misc,
-            flex_properties,
             )
 
     list_filter = (
@@ -253,6 +285,36 @@ class ContainerAdmin(admin.ModelAdmin):
        
         )
     
+
+class ButtonAdmin(admin.ModelAdmin):
+    list_display = (
+                    'name',
+                    'order',
+        )
+    fieldsets = (
+            ('Button Properties',
+                {
+                    'fields':(
+                        'name',
+                       
+                        ),
+                    'description':"""the properties relative to the button"""
+                }),
+            html_tags,
+            sizes,
+            spacing,
+            background,
+            position,
+            misc,
+            flex_properties,
+            )
+
+    list_filter = (
+        'name',       
+        )
+    
+
+
 
 class OverlayAdmin(admin.ModelAdmin):
     list_display = (
@@ -469,6 +531,7 @@ class ImageAdmin(admin.ModelAdmin):
 
 admin.site.register(Page, PageAdmin)
 admin.site.register(Navbar, NavbarAdmin)
+admin.site.register(Grid, GridAdmin)
 admin.site.register(Footer, FooterAdmin)
 admin.site.register(Text, TextAdmin)
 admin.site.register(Section, SectionAdmin)
