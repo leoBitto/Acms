@@ -7,10 +7,14 @@
                 container
                 {{ container.CSS_classes }}
                 
+                col-{{ container.col }}
+
                 p{{ container.padding_sides }}{{ container.padding }}
                 m{{ container.margin_sides }}{{ container.margin }}
 
                 {{ container.bg_color }}{{ container.bg_gradient }}
+                {{ container.borders }}
+                {{ container.borders_colors }}
                 {{ container.shadow }}
 
                 d{{ container.display }}{{ container.inline }}
@@ -25,7 +29,7 @@
                 {% endif %}
 
                 flex-{{ container.direction }} 
-                {{ container.breakpoint }}
+                
                 {{ container.order}}
                 flex{{ container.flex_wrap }}
                 justify-content{{ container.justify_content }}
@@ -37,17 +41,17 @@
                 
                 "
                 style="
-                    max-height:{{ container.height }}%;
-                    max-width:{{ container.width }}%;
-                "
-                {% if container.bg_image != '' %}
-                style="  
+                    max-height:{{ container.height }};
+                    max-width:{{ container.width }};
+                
+                    {% if container.bg_image != '' %}
                     background-image: url('{{ container.bg_image.url }}'); 
                     background-position: center; 
                     background-repeat: no-repeat; 
                     background-size: cover; 
+                    {% endif %}
                 "
-                {% endif %}
+                
     >
 
      {% for overlay in container.overlay_set.all %}
@@ -104,6 +108,8 @@
                             {{ image.bg_color }}{{ image.bg_gradient }}
                             {{ image.shadow }}
                             d{{ image.display }}{{ image.inline }}
+                            {{ image.borders }}
+                            {{ image.borders_colors }}
                             {{ image.visibility }}
                             {{ image.position }}
                             {% if image.position == 'position-absolute' %}
@@ -118,19 +124,20 @@
                             align-self{{ image.align_self }}
                             "
                         
+                        src="/media/{{ image.url }}"
+                        style = "
+                            max-height:{{ image.height }};
+                            max-width:{{ image.width }};
+                            object-fit:{{ image.object_fit }};
+
                         {% if image.bg_image != '' %}
-                        style="  
+                     
                             background-image: url('{{image.bg_image.url}}'); 
                             background-position: center; 
                             background-repeat: no-repeat; 
                             background-size: cover; 
-                            "
+                            
                         {% endif %}
-
-                        src="/media/{{ image.url }}"
-                        style = "
-                            max-height:{{ image.height }}%;
-                            max-width:{{ image.width }}%;
                             "
                             >
                 {% endwith %}

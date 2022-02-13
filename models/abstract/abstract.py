@@ -103,18 +103,18 @@ class CSS(models.Model):
     #bootstrap sizing
     col = models.CharField(
         choices=[
-            ('-1','1'),
-            ('-2','2'),
-            ('-3','3'),
-            ('-4','4'),
-            ('-5','5'),
-            ('-6','6'),
-            ('-7','7'),
-            ('-8','8'),
-            ('-9','9'),
-            ('-10','10'),
-            ('-11','11'),
-            ('-12','12'),
+            ('1','1'),
+            ('2','2'),
+            ('3','3'),
+            ('4','4'),
+            ('5','5'),
+            ('6','6'),
+            ('7','7'),
+            ('8','8'),
+            ('9','9'),
+            ('10','10'),
+            ('11','11'),
+            ('12','12'),
         ],
         max_length=3, 
         blank=True, 
@@ -150,7 +150,7 @@ class CSS(models.Model):
         max_length=5, 
         blank=True, 
         null=True,
-        default=''
+        default='-0'
         )
     margin_sides = models.CharField(
         choices=[
@@ -179,7 +179,7 @@ class CSS(models.Model):
         max_length=5,
         blank=True, 
         null=True,
-        default=''
+        default='-0'
         )
     
     #breakpoint
@@ -192,10 +192,10 @@ class CSS(models.Model):
             ('-xl','xl'),
             ('-xxl','xxl'),
             ('-fluid','fluid'),
-            (None, 'no breakpoint')
+            ('', 'no breakpoint')
         ],
-        default=None,
-        blank=False,
+        default='',
+        blank=True,
         null=True,
         help_text="breakpoint work from the point indicated forward meaning that the content is 100percent until the breakpoint"
         )
@@ -238,6 +238,42 @@ class CSS(models.Model):
         )
     
     #borders
+    borders = models.CharField(
+            choices = [
+                ('rounded', 'small rounding all corners'),
+                ('rounded-top', 'small rounding top corners'),
+                ('rounded-end', 'small rounding right corners'),
+                ('rounded-bottom', 'small rounding bottom corners'),
+                ('rounded-start', 'small rounding left corners'),
+                ('rounded-circle', 'as a circle'),
+                ('rounded-pill', 'in pill form'),
+                ('', 'no rounding'),
+            ],
+            default = '',
+            blank = True,
+            null = True,
+            max_length=30,
+    )
+
+    #borders colors
+    borders_colors = models.CharField(
+            choices = [
+                ('border border-primary', 'blue'),
+                ('border border-secondary', 'grey'),
+                ('border border-success', 'green'),
+                ('border border-danger', 'red'),
+                ('border border-warning', 'yellow'),
+                ('border border-info', 'cyan'),
+                ('border border-light', 'light'),
+                ('border border-dark', 'black'),
+                ('border border-white', 'white '),
+                ('', 'no border, no color'),
+            ],
+            default = '',
+            blank = True,
+            null = True,
+            max_length=30,
+        )
 
     #shadows
     shadow = models.CharField(
@@ -343,7 +379,7 @@ class CSS(models.Model):
             ('-75','75'),
             ('-100','100'),  
         ],
-        default='',
+        default='-100',
         blank=True,
         )
     #display from utilities
@@ -421,7 +457,7 @@ class Flex(CSS):
             ('row','row'),
             ('row-reverse','row-reverse'),
         ],
-        default='',
+        default='row',
         blank=True,
         max_length=20,
         )   
@@ -432,7 +468,7 @@ class Flex(CSS):
             ('-nowrap','no wrap'),
             ('-wrap-reverse','wrap reverse'),
         ],
-        default='',
+        default='-nowrap',
         blank=True,
         help_text="""
             wrap of the content inside flex container
@@ -451,7 +487,7 @@ class Flex(CSS):
             ('-between','between'),
             ('-evenly','evenly'),
         ],
-        default='',
+        default='-center',
         blank=True,
         help_text="""
             alignment of content on the main axis:
@@ -468,7 +504,7 @@ class Flex(CSS):
             ('-baseline','baseline'),
             ('-stretch','stretch'),
         ],
-        default='',
+        default='-center',
         blank=True,
         help_text="""
             alignment of content on the cross axis:
@@ -485,7 +521,7 @@ class Flex(CSS):
             ('-around','around'),
             ('-stretch','stretch'),
         ],
-        default='',
+        default='-center',
         blank=True,
         help_text="""
             align all the  content

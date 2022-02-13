@@ -1,4 +1,3 @@
-from audioop import reverse
 from django.contrib import admin
 from django.utils.html import format_html
 
@@ -68,6 +67,7 @@ misc=('Misc',
                     'opacity',
                     ('display',
                      'inline',),
+                     ('borders', 'borders_colors')
                      ),
             'description':"miscellaneous properties, breakpoint refer to the flex direction",
             'classes':('collapse',),
@@ -136,11 +136,12 @@ class NavbarAdmin(admin.ModelAdmin):
         ('Navbar Properties',
             {
                 'fields':(
+                    #'pages_with_navbar',
                     'logo',
                     'brand_name',
                     'navbar_color',
                     'placement',
-                    
+                    'has_user_functionality',
                     ),
                 'description':"""the properties relative to the navbar"""
             }
@@ -195,7 +196,7 @@ class SectionAdmin(admin.ModelAdmin):
             ('Sizes',
                 {
                 'fields':('height',),
-                'description':"height of the section, they refer to min viewports. leave height empty to make it adapt to content, make it 100 to make it span all the viewport. the width is always set to 100",
+                'description':" in this case it only accepts values from 0 to 100. height of the section, they refer to min viewports. leave height empty to make it adapt to content, make it 100 to make it span all the viewport. the width is always set to 100",
                 'classes':('collapse','wide'),
                 }),      
             spacing,
@@ -207,7 +208,7 @@ class SectionAdmin(admin.ModelAdmin):
                         'visibility',
                         'inline',
                         ),
-                'description':"breakpoint refer to the flex direction, display is flex.",
+                'description':"breakpoint refer to the flex direction, display is flex. IS MANDATORY IF YOU SET DIRECTION ROW",
                 'classes':('collapse',),
                 }),
             flex_properties,
@@ -274,9 +275,11 @@ class ContainerAdmin(admin.ModelAdmin):
                 }),
             html_tags,
             sizes,
+            background,
             spacing,
             position,
             misc,
+            flex_properties
             )
 
     list_filter = (
@@ -284,7 +287,7 @@ class ContainerAdmin(admin.ModelAdmin):
         'section',
        
         )
-    
+      
 
 class ButtonAdmin(admin.ModelAdmin):
     list_display = (
@@ -313,8 +316,6 @@ class ButtonAdmin(admin.ModelAdmin):
         'name',       
         )
     
-
-
 
 class OverlayAdmin(admin.ModelAdmin):
     list_display = (
@@ -362,12 +363,14 @@ class LinkAdmin(admin.ModelAdmin):
     list_display = (
         'getLink',
         'toPage',
+        'external_link',
         'textShown',
      )
     fieldsets = (
         ('Link Properties',
             {
                 'fields':(  'toPage',
+                            'external_link',
                             'textShown',
                             'stretched_link',
                             ),
@@ -499,21 +502,30 @@ class ImageAdmin(admin.ModelAdmin):
                     'creation_date', 
                     'image_tag',
                     )
+    
+    #add_form_template = 'admin/image_form.html'
+    #change_form_template = 'admin/image_form.html'
+
     fieldsets = (
         ('Image Properties',
             {
-                'fields':('url', 'author',),
+                'fields':(
+                    'url',
+                    'author',
+               
+                    ),
                 'description':"""the properties relative to the Image css"""
             }
             ),
         html_tags,
-        spacing,
         sizes,
         ('Default image',
             {
                 'fields': (
                     ('bg_image','bg_color','bg_gradient','shadow',),
                     ('visibility',),
+                    'object_fit',
+                    ('borders', 'borders_colors'),
                     ),
                 'description':""" the default image or color that the img tag
                                 refer to when the resource cant be found and other things
@@ -522,11 +534,10 @@ class ImageAdmin(admin.ModelAdmin):
             }
             ),
         )
-  
-    
+
 
     def image_tag(self,obj):
-        return format_html('<img src="{0}" style="height:200px;" />'.format(obj.url.url))
+        return format_html('<img src="{0}" style="height:400px;" />'.format(obj.url.url))
 
 
 admin.site.register(Page, PageAdmin)
@@ -539,4 +550,5 @@ admin.site.register(Container, ContainerAdmin)
 admin.site.register(Overlay, OverlayAdmin)
 admin.site.register(Link,LinkAdmin)
 admin.site.register(Image, ImageAdmin)
+
 

@@ -6,7 +6,7 @@ from ..models.pages import Page
 def base(request):
     path = request.path[1:]
     page = get_object_or_404(Page, url = path)
-
+    
     context = {
         'page'  : page,        
         }

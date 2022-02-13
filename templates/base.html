@@ -16,14 +16,17 @@
         ">
         
         {% if page.navbar != Null %}
-        
-        {% with page.navbar as navbar %}
-            {% block navbar %}
-            {% include "navbar.html" %}
-            {% endblock %}
-        {% endwith %} 
+            {% with page.navbar as navbar %}
+                {% block navbar %}
+                {% include "navbar.html" %}
+                {% endblock %}
+            {% endwith %} 
         {% endif %}
         
+
+        {% block content %}
+
+        {% endblock content %}
 
         {% for section in page.section_set.all %}
             {% block section %}
@@ -33,11 +36,11 @@
 
 
         {% if page.footer != Null %}
-        {% with page.footer as footer %}
-            {% block footer %}
-            {% include "footer.html" %}
-            {% endblock %}
-        {% endwith %} 
+            {% with page.footer as footer %}
+                {% block footer %}
+                {% include "footer.html" %}
+                {% endblock %}
+            {% endwith %} 
         {% endif %}
     
     

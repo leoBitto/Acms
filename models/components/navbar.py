@@ -2,11 +2,27 @@
 from django.db import models
 from ..abstract.abstract import Flex
 from ..content.image import Image
+#from ..pages import Page
 """
 Navbar component model it is rendered with a <nav>
 one navbar can be 
 """
 class Navbar(Flex):
+
+    # #pages displayed in the navbar:
+    # pages_displayed = models.ManyToManyField(
+    #     Page,
+    #     blank=True,
+    # )
+
+    # #pages where the navbar appear
+    # pages_with_navbar = models.ManyToManyField(
+    #     Page,
+    #     blank=True,
+
+    # )
+
+    has_user_functionality = models.BooleanField(default=False)
 
     ##logo
     #optional image inside the navbar-brand
@@ -18,12 +34,13 @@ class Navbar(Flex):
         on_delete=models.SET_NULL,
         )
     ##nome brand
-    #it refer to the element with the class
+    #it refer to the <a> element with the class
     #'navbar-brand'
     brand_name = models.CharField(
             max_length=25,
             blank=True,
             null=True,
+            default='',
             help_text="this is the name of the brand"
         )
 

@@ -15,6 +15,12 @@ class Link(Flex):
         blank=True,
         null=True,
         )
+    external_link = models.CharField(
+        max_length=150,
+        blank=True,
+        null=True,
+        )
+
     textShown = models.ForeignKey(
         Text,
         on_delete=models.SET_NULL,

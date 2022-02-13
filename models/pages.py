@@ -1,4 +1,4 @@
-from django.conf.urls import url
+#from django.conf.urls import url
 from django.db import models
 
 from .components.navbar import Navbar
@@ -34,7 +34,7 @@ class Page(models.Model):
     def __str__(self):
         return self.url
 
-    def save(self, *args, **kwargs):
+    def model_save(self, *args, **kwargs):
         from ..urls import urlpatterns
         from ..views import views
         from django.urls import path
@@ -50,8 +50,7 @@ class Page(models.Model):
                     name=n
                     )
                 )
-        
-        super().save(*args, **kwargs)#call the real save() method   
+        #super().save(*args, **kwargs)#call the real save() method   
 
     def delete(self, *args, **kwargs):
         from ..urls import urlpatterns

@@ -18,8 +18,16 @@
                 d-flex{{ section.inline }}
                 {{ section.visibility }}
 
+                
+                {% if section.direction == 'row' or section.direction == 'row-reverse' %}
                 flex-column
-                flex{{ section.breakpoint }}-row
+                flex{{ section.breakpoint }}-{{ section.direction }}
+                {% else %}
+                flex-{{ section.direction }}
+                {% endif %}
+                
+                
+
                 {{ section.order }}
                 flex{{ section.flex_wrap }}
                 justify-content{{ section.justify_content }}

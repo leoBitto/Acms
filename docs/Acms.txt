@@ -29,9 +29,9 @@ id tag and Css and Js files can be added in the db.
 #layout
     DONE___breakpoints
     DONE___containers
-    grid
-    columns
-    gutters
+    DONE ALTERNATVELY__grid
+    DONE ALTERNATVELY__columns
+    DONE ALTERNATVELY__gutters
     DONE___utilities
     DONE___z-index
     ADDED___section
@@ -101,13 +101,7 @@ id tag and Css and Js files can be added in the db.
     DONE__vertical align
     DONE__visibility
 
-#####IDEA:: make CSS model concrete and make it point to 
-            the single component, many components can then 
-            point to the set of CSS properties that return 
-            a string of classes created with the parameters
-            set. this allow components that dont need CSS 
-            properties to be easily set. 
-            as it is for now its not too messy
+
 
 ###########################################################
 ### How to ################################################
@@ -227,6 +221,9 @@ components/navbar   Navbar Footer
     footer in order to insert it in the page, this allows 
     you to create particular pages in the site like landing 
     pages or 404 pages
+    EVERY TIME A NEW PAGE IS ADDED THE SERVER MUST BE RESTARTED
+    THIS IS BECAUSE THE URLPATTERN LIST IN urls.py IS UPDATED 
+    WHEN THE SERVER START
 
 ##Section
     every section group every other layout block
