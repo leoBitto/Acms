@@ -11,6 +11,7 @@ from .models.content.link import Link
 from .models.components.navbar import Navbar
 from .models.components.footer import Footer
 from .models.components.overlay import Overlay
+from .models.components.card import Card
 
 html_tags =('HTML tags',
             {
@@ -41,7 +42,7 @@ background=('Background',
                     'bg_image',
                     'bg_color',
                     'bg_gradient',
-                    'shadow',
+                   
                     ),
             'description':"background properties",
             'classes':('collapse',),                        
@@ -67,7 +68,8 @@ misc=('Misc',
                     'opacity',
                     ('display',
                      'inline',),
-                     ('borders', 'borders_colors')
+                     ('borders', 'borders_colors'),
+                      'shadow',
                      ),
             'description':"miscellaneous properties, breakpoint refer to the flex direction",
             'classes':('collapse',),
@@ -89,7 +91,46 @@ flex_properties=('Flex properties',
             'classes':('collapse',),
             })
 
+
+class SectionInline(admin.StackedInline):
+    model = Section
+    extra = 0
+    fieldsets = (
+            ('Section properties',
+            {
+                'fields':(
+                    'name', 
+                    'page',
+                    'breakpoint',
+                )
+            }),
+            html_tags,
+            ('Sizes',
+                {
+                'fields':('height',),
+                'description':" in this case it only accepts values from 0 to 100. height of the section, they refer to min viewports. leave height empty to make it adapt to content, make it 100 to make it span all the viewport. the width is always set to 100",
+                'classes':('collapse','wide'),
+                }),      
+            spacing,
+            background,
+            ('Misc',
+                {
+                'fields':
+                        (
+                        'visibility',
+                        'inline',
+                        ),
+                'description':"breakpoint refer to the flex direction, display is flex. IS MANDATORY IF YOU SET DIRECTION ROW",
+                'classes':('collapse',),
+                }),
+            flex_properties,
+        )
+
+
 class PageAdmin(admin.ModelAdmin):
+    
+    inlines = [SectionInline]
+
     list_display = ( 
         'name',
         'url', 
@@ -178,7 +219,57 @@ class FooterAdmin(admin.ModelAdmin):
     )
 
 
+class GridInline(admin.StackedInline):
+    model = Grid
+    extra = 0
+    fieldsets = (
+            ('Grid Properties',
+                {
+                    'fields':(
+                        'name',
+                        'section',
+                        'gap',
+                        'cell_min',
+                        ),
+                    'description':"""the properties relative to the grid"""
+                }),
+            html_tags,
+            sizes,
+            spacing,
+           
+            misc,
+            )
+
+class ContainerInline(admin.StackedInline):
+    model = Container
+    extra = 0
+    fieldsets = (
+            ('Container Properties',
+                {
+                    'fields':(
+                        'name',
+                        'section',
+                        'grid',
+                        'texts',
+                        'images',
+                        'link',
+                        ),
+                    'description':"""the properties relative to the container
+                                        the sections it belongs to
+                                        and the content it contain"""
+                }),
+            html_tags,
+            sizes,
+            background,
+            spacing,
+            position,
+            misc,
+            flex_properties
+            )
+
 class SectionAdmin(admin.ModelAdmin):
+    inlines = [ContainerInline, GridInline]
+    
     list_display = (
                     'name',
                     'page',
@@ -190,6 +281,7 @@ class SectionAdmin(admin.ModelAdmin):
                 'fields':(
                     'name', 
                     'page',
+                    'breakpoint',
                 )
             }),
             html_tags,
@@ -204,7 +296,7 @@ class SectionAdmin(admin.ModelAdmin):
             ('Misc',
                 {
                 'fields':
-                        ('breakpoint',
+                        (
                         'visibility',
                         'inline',
                         ),
@@ -288,6 +380,44 @@ class ContainerAdmin(admin.ModelAdmin):
        
         )
       
+
+class CardAdmin(admin.ModelAdmin):
+    list_display = (
+                    'name',
+                    'section',
+                    'grid',
+                    'order',
+        )
+    fieldsets = (
+            ('Container Properties',
+                {
+                    'fields':(
+                        'name',
+                        'section',
+                        'grid',
+                        'text',
+                        'image',
+                        'link',
+                        ),
+                    'description':"""the properties relative to the card
+                                        the sections it belongs to
+                                        and the content it contain"""
+                }),
+            html_tags,
+            sizes,
+            background,
+            spacing,
+            position,
+            misc,
+            flex_properties,
+            )
+
+    list_filter = (
+        'name',
+        'section',
+       
+        )
+ 
 
 class ButtonAdmin(admin.ModelAdmin):
     list_display = (
@@ -512,7 +642,7 @@ class ImageAdmin(admin.ModelAdmin):
                 'fields':(
                     'url',
                     'author',
-               
+                    #'object_fit',
                     ),
                 'description':"""the properties relative to the Image css"""
             }
@@ -547,6 +677,7 @@ admin.site.register(Footer, FooterAdmin)
 admin.site.register(Text, TextAdmin)
 admin.site.register(Section, SectionAdmin)
 admin.site.register(Container, ContainerAdmin)
+admin.site.register(Card, CardAdmin)
 admin.site.register(Overlay, OverlayAdmin)
 admin.site.register(Link,LinkAdmin)
 admin.site.register(Image, ImageAdmin)

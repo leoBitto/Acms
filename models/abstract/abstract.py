@@ -229,7 +229,7 @@ class CSS(models.Model):
         )
     bg_gradient = models.CharField(
         choices=[
-            ('.bg-gradient','bottom-top gradient'),
+            ('bg-gradient','bottom-top gradient'),
             ('','no gradient'),
         ],
         default='', 

@@ -16,9 +16,9 @@
         "
     >
     
-    {% for container in grid.container_set.all %}
-        {% block container %}
-            {% include 'container.html' %}
+    {% for card in grid.card_set.all %}
+        {% block card %}
+            {% include 'card.html' %}
         {% endblock %}
     {% endfor %}
 

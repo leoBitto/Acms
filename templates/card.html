@@ -1,0 +1,113 @@
+{% load static %}
+{% load classFilter %}
+{% block card %}
+    <div 
+        id = "{{ card.CSS_id }}"
+        class="
+            card
+            {{ card.CSS_classes }}
+            
+            col{{ card.breakpoint }}-{{ card.col }}
+
+            p{{ card.padding_sides }}{{ card.padding }}
+            m{{ card.margin_sides }}{{ card.margin }}
+
+            {{ card.bg_color }}{{ card.bg_gradient }}
+            {{ card.borders }}
+            {{ card.borders_colors }}
+            {{ card.shadow }}
+
+            d{{ card.display }}{{ card.inline }}
+            {{ card.visibility }}
+
+            {{ card.position }}
+            {% if card.position == 'position-absolute' %}
+                top-{{ card.top }}
+                start-{{ card.left }}
+                bottom-{{ card.down }}
+                end-{{ card.right }}
+            {% endif %}
+
+            flex-{{ card.direction }} 
+            
+            {{ card.order}}
+            flex{{ card.flex_wrap }}
+            justify-content{{ card.justify_content }}
+            align-items{{ card.align_items }}
+            align-content{{ card.align_content }}
+            flex-grow-{{ card.flex_grow }}
+
+            align-self{{ card.align_self }}
+            
+            "
+            style="
+                max-height:{{ card.height }};
+                max-width:{{ card.width }};
+            
+                {% if card.bg_image != '' %}
+                background-image: url('{{ card.bg_image.url }}'); 
+                background-position: center; 
+                background-repeat: no-repeat; 
+                background-size: cover; 
+                {% endif %}
+            "
+                
+    >
+    
+    {% with card.image as image %}
+        <img  
+    
+            id = "{{ image.CSS_id }}"
+            class="
+                card-img-top
+                "
+                        
+            src="/media/{{ image.url }}"
+            style = "
+                max-height:{{ image.height }};
+                max-width:{{ image.width }};
+                object-fit:{{ image.object_fit }};
+
+            {% if image.bg_image != '' %}
+            
+                background-image: url('{{image.bg_image.url}}'); 
+                background-position: center; 
+                background-repeat: no-repeat; 
+                background-size: cover; 
+                
+            {% endif %}
+                "
+        >
+    {% endwith %}
+
+    {% with card.text as text %}
+            <p class="
+                d-flex
+                align-content-center 
+                justify-content-center
+                text{{ text.color }}
+                text{{ text.alignment }}
+                fs{{ text.size }}
+                fw{{ text.weight }}
+                fst{{ text.italics }}
+                lh{{ text.line_height }}
+                text-decoration{{ text.text_decoration }}
+                align{{ text.vertical_align }}
+                overflow{{ text.overflow }}
+            ">
+            
+                {{ text.txt }} 
+            </p>
+        {% endwith %}
+
+    {% if card.link %}
+    {% with card.link as link %}
+        {% block Link %}
+            {% include 'link.html' %}
+        {% endblock %}
+    {% endwith %}
+    {% endif %}
+
+    </div>
+
+{% endblock card %}
