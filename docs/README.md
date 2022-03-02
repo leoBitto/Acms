@@ -1,5 +1,5 @@
 
-Acms
+# Acms
 =====
 
 Acms is a Django app to organize content in a website
@@ -8,7 +8,7 @@ and Django 4.0 . Its scope is to allow people with no
 knowledge to create simple websites that contain images and text
 
 
-Quick start
+## Quick start
 -----------
 
 1. Add "Acms" to your INSTALLED_APPS setting like this::
