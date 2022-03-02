@@ -1,26 +1,33 @@
 
-Acms
-=====
+# Acms
 
-Acms is a Django app to organize content in a website
+-----------
+
+Acms is a Django app to organize content in a website.
 A content management system created with Bootstrap 5.0 
 and Django 4.0 . Its scope is to allow people with no 
 knowledge to create simple websites that contain images and text
-
-
-Quick start
 -----------
+
+## Quick start
+
 
 [ ]1. Add "Acms" to your INSTALLED_APPS setting like this::
 
+    ```
     INSTALLED_APPS = [
         ...
         'Acms',
     ]
+<<<<<<< HEAD
 
 [ ]2. Include the Acms URLconf in your project urls.py like this::
+=======
+    ```
+2. Include the Acms URLconf in your project urls.py like this::
+>>>>>>> 5f5057e74592bf468a91e3382cc8ecd46393c5ae
 
-    path('', include(('Acms.urls', 'Acms'), namespace="Acms")),
+    > path('', include(('Acms.urls', 'Acms'), namespace="Acms")),
 
 [ ]3. Run ``python manage.py migrate`` to create the Acms models.
 
@@ -30,11 +37,9 @@ Quick start
 [ ]5. Visit http://127.0.0.1:8000 to see the website
 
 
+-----------
 
-
-##                                                      ##
-##                      Acms docs                       ##
-##                                                      ##
+# Acms docs                       
 
 this content management system is a way to give
 bootstrap 5.0 a graphic interface to facilitate
@@ -110,7 +115,7 @@ the Js files point to Pages.
     ADDED___overlay
      
 
-#### helpers #
+# helpers 
     clearfix
     NOTUSEFULLFORNOW__coloredlinks
     NOTUSEFULLFORNOW__ratio
@@ -119,7 +124,7 @@ the Js files point to Pages.
     DONE___stretched link (OVERLAY COMPONENT)
     AVOIDED__text truncation
 
-# utilities #
+# utilities 
     API
     DONE__Background
     NOTUSEFULLFORNOW__borders
@@ -353,7 +358,7 @@ THEY ALL ACCEPT TUPLES OF N ELEMENTS
                 first element, its the title of the group
                 of attributes, while the second element of
                 the tuple is a dictionary of:
-                =classes : used to define behavior, ACCEPT
+                -classes : used to define behavior, ACCEPT
                             a tuple of string elements. to
                             collapse the options:
                             ('collapse',)
@@ -361,11 +366,11 @@ THEY ALL ACCEPT TUPLES OF N ELEMENTS
                             ('wide')
                             these are CSS classes applied to
                             the fieldset
-                =fields  : its a tuple containing more
+                -fields  : its a tuple containing more
                             attributes that can be set
                             it is like using the fields
                             explained before.
-                =description:is a string containing extra text 
+                -description:is a string containing extra text 
                             displayed a the to of each fieldset
                             it can contain HTML elements
 
@@ -413,11 +418,11 @@ section
 |
 container
 |
-text    image   Overlay      link           Grid*
-                    |           |               |
-                    Link        Text            row
-                                Image           |
-                                                col
+text    image   Overlay      link           Grid
+                    |           |               
+                    Link        Text            
+                                Image           
+                                              
 
 
 
