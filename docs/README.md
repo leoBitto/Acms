@@ -31,11 +31,11 @@ Quick start
 
 
 
-##########################################################
+
 ##                                                      ##
 ##                      Acms docs                       ##
 ##                                                      ##
-##########################################################
+
 this content management system is a way to give
 bootstrap 5.0 a graphic interface to facilitate
 the display of content in an html page
@@ -61,8 +61,8 @@ id tag and Css and Js files can be added in the db.
 the Js files point to Pages.
 
 
-########### ROADMAP OF IMPLEMENTATION #####################
-#layout
+# ROADMAP OF IMPLEMENTATION #
+# layout #
     DONE___breakpoints
     DONE___containers
     DONE ALTERNATVELY__grid
@@ -73,7 +73,7 @@ the Js files point to Pages.
     ADDED___section
     ADDED___page
 
-#forms
+# forms#
     form control
     select
     checks a radios
@@ -83,7 +83,7 @@ the Js files point to Pages.
     layout
     validation
 
-#components
+# components
     accordion
     alerts
     badge
@@ -110,7 +110,7 @@ the Js files point to Pages.
     ADDED___overlay
      
 
-#helpers
+# helpers#
     clearfix
     NOTUSEFULLFORNOW__coloredlinks
     NOTUSEFULLFORNOW__ratio
@@ -119,7 +119,7 @@ the Js files point to Pages.
     DONE___stretched link (OVERLAY COMPONENT)
     AVOIDED__text truncation
 
-#utilities
+# utilities
     API
     DONE__Background
     NOTUSEFULLFORNOW__borders
@@ -139,17 +139,17 @@ the Js files point to Pages.
 
 
 
-###########################################################
-### How to ################################################
-###########################################################
 
-#create a new Page
+### How to ################################################
+
+
+# create a new Page
     1. create a Page object
     2. create a Section object pointing to the name 
         page
     3. restart the server if necessary
 
-#create a journal like page
+# create a journal like page
     1. create the articles, divided in paragraphs
     2. insert the content text created in two 
         containers
@@ -157,9 +157,9 @@ the Js files point to Pages.
         direction to row
 
 
-##########################################################
-######### Apps.py ########################################
-##########################################################
+
+### Apps.py ##############################################
+
 
 apps.py contain app configuration, it is called two times 
 in Acms. the ready method is overridden to create urls in 
@@ -170,9 +170,8 @@ command; in the ready method we import all we need to use
 it is done in the method so we are sure everything is loaded 
 before creating the urls
 
-##########################################################
 ############## Models ####################################
-##########################################################
+
 
 #NB# to implement a one to many relationship in django the 
     MANY have to point to the one, its not possible for the
@@ -224,7 +223,7 @@ https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key
         layout.py
 
 
-##css models and files that contain them.
+## css models and files that contain them.
 files.py:    
                     Model
                     |
@@ -241,16 +240,16 @@ pages                       Section
 components          Overlay
 components/navbar   Navbar Footer
 
-##CSS
+## CSS
     is an ABSTRACT class containing all the parameters that
     bootstrap allow you to control, 
     the parameters 
 
-##Flex
+## Flex
     is another ABSTRACT class that let you to control the 
     parameters that bootstrap allow you to set.
 
-##Page
+## Page
     the page model, every page contains a certain number
     of sections, every page CAN point to a navbar and a 
     footer in order to insert it in the page, this allows 
@@ -260,7 +259,7 @@ components/navbar   Navbar Footer
     THIS IS BECAUSE THE URLPATTERN LIST IN urls.py IS UPDATED 
     WHEN THE SERVER START
 
-##Section
+## Section
     every section group every other layout block
     wether it is a grid(row+cols) or a goups of container etc...
     the sections can be ordered
@@ -281,7 +280,7 @@ components/navbar   Navbar Footer
     one to many relationship, one Page, many Sections.
     every sections point to one page.
 
-##Container 
+## Container 
     allow to group content wether it is text, images, 
     videos, canvas, etc..
     containers can be used like thumbnails or 
@@ -291,25 +290,25 @@ components/navbar   Navbar Footer
 
     otherway to insert a proper grid :
 
-##Grid
+## Grid
     it is a class that is pointed by Containers or other 
     components 
     it organize the content in a grid using css grid system
 
 
-##Navbar
+## Navbar
     
-##Footer
+## Footer
 
-##CONTENTS
-###Text
+## CONTENTS
+### Text
     text objects contains metadata about the text like 
     the data they were created, the author etc
     text are pointed by Containers and Grids
     so it can be displayed in two different part of the site
 
 
-###Image
+### Image
     it is pointed by the containers or grids
     so it can be displayed in different part of the site but the 
     possibility to order them in the page is more difficult. 
@@ -317,9 +316,9 @@ components/navbar   Navbar Footer
     Containers once the are part of a Section
 
 
-############################################################
-############## Admin #######################################
-############################################################
+
+## Admin 
+
 every object is rapresented in admin panel apart for 
 abstract objects like CSS and Flex.
 https://docs.djangoproject.com/en/4.0/ref/contrib/admin/
@@ -386,9 +385,9 @@ THEY ALL ACCEPT TUPLES OF N ELEMENTS
 
 
 
-############################################################
-############## Views #######################################
-############################################################
+
+## Views 
+
 views are used to serve the base.html and populate with the 
 data, passed as context dict, from the Page object requested
 
@@ -401,12 +400,12 @@ through auth native of django or not
 
 
 
-############################################################
-####### Content (templates) ################################
-############################################################
+
+## Content (templates) 
 
 
-template file structure: *to be implemented
+
+template file structure:
 
 base
 |
@@ -417,14 +416,14 @@ container
 text    image   Overlay      link           Grid*
                     |           |               |
                     Link        Text            row
-                                Image*          |
+                                Image           |
                                                 col
 
 
 
-############################################################
-############### Urls #######################################
-############################################################
+
+## Urls 
+
 
 urls are handled thanks to three overridden methods, 
 
