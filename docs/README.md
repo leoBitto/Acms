@@ -61,7 +61,7 @@ id tag and Css and Js files can be added in the db.
 the Js files point to Pages.
 
 
-# ROADMAP OF IMPLEMENTATION #
+## ROADMAP OF IMPLEMENTATION ##
 # layout #
     DONE___breakpoints
     DONE___containers
@@ -73,7 +73,7 @@ the Js files point to Pages.
     ADDED___section
     ADDED___page
 
-# forms#
+# forms #
     form control
     select
     checks a radios
@@ -83,7 +83,7 @@ the Js files point to Pages.
     layout
     validation
 
-# components
+# components #
     accordion
     alerts
     badge
@@ -110,7 +110,7 @@ the Js files point to Pages.
     ADDED___overlay
      
 
-# helpers#
+# helpers #
     clearfix
     NOTUSEFULLFORNOW__coloredlinks
     NOTUSEFULLFORNOW__ratio
@@ -119,7 +119,7 @@ the Js files point to Pages.
     DONE___stretched link (OVERLAY COMPONENT)
     AVOIDED__text truncation
 
-# utilities
+# utilities #
     API
     DONE__Background
     NOTUSEFULLFORNOW__borders
@@ -143,13 +143,13 @@ the Js files point to Pages.
 ### How to ################################################
 
 
-# create a new Page
+# create a new Page #
     1. create a Page object
     2. create a Section object pointing to the name 
         page
     3. restart the server if necessary
 
-# create a journal like page
+# create a journal like page #
     1. create the articles, divided in paragraphs
     2. insert the content text created in two 
         containers
@@ -170,7 +170,7 @@ command; in the ready method we import all we need to use
 it is done in the method so we are sure everything is loaded 
 before creating the urls
 
-############## Models ####################################
+### Models ####################################
 
 
 #NB# to implement a one to many relationship in django the 
