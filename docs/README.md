@@ -34,7 +34,7 @@ knowledge to create simple websites that contain images and text
 ----------------------------------------------------------
 ----------------------------------------------------------
 
-##                      Acms docs                       ##
+# Acms docs                       
 
 this content management system is a way to give
 bootstrap 5.0 a graphic interface to facilitate
@@ -61,9 +61,9 @@ id tag and Css and Js files can be added in the db.
 the Js files point to Pages.
 
 
-## ROADMAP OF IMPLEMENTATION ##
-# layout #
-    DONE___breakpoints
+## ROADMAP OF IMPLEMENTATION 
+# layout 
+    -[x] breakpoints
     DONE___containers
     DONE ALTERNATVELY__grid
     DONE ALTERNATVELY__columns
@@ -73,8 +73,8 @@ the Js files point to Pages.
     ADDED___section
     ADDED___page
 
-# forms #
-    form control
+# forms 
+    -[ ] form control
     select
     checks a radios
     range
@@ -83,7 +83,7 @@ the Js files point to Pages.
     layout
     validation
 
-# components #
+# components 
     accordion
     alerts
     badge
@@ -110,7 +110,7 @@ the Js files point to Pages.
     ADDED___overlay
      
 
-# helpers #
+# helpers 
     clearfix
     NOTUSEFULLFORNOW__coloredlinks
     NOTUSEFULLFORNOW__ratio
@@ -119,7 +119,7 @@ the Js files point to Pages.
     DONE___stretched link (OVERLAY COMPONENT)
     AVOIDED__text truncation
 
-# utilities #
+# utilities 
     API
     DONE__Background
     NOTUSEFULLFORNOW__borders
