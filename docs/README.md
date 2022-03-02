@@ -11,23 +11,23 @@ knowledge to create simple websites that contain images and text
 Quick start
 -----------
 
-1. Add "Acms" to your INSTALLED_APPS setting like this::
+[ ]1. Add "Acms" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...
         'Acms',
     ]
 
-2. Include the Acms URLconf in your project urls.py like this::
+[ ]2. Include the Acms URLconf in your project urls.py like this::
 
     path('', include(('Acms.urls', 'Acms'), namespace="Acms")),
 
-3. Run ``python manage.py migrate`` to create the Acms models.
+[ ]3. Run ``python manage.py migrate`` to create the Acms models.
 
-4. Start the development server and visit http://127.0.0.1:8000/admin/
+[ ]4. Start the development server and visit http://127.0.0.1:8000/admin/
    to create the models (you'll need the Admin app enabled).
 
-5. Visit http://127.0.0.1:8000 to see the website
+[ ]5. Visit http://127.0.0.1:8000 to see the website
 
 
 
@@ -62,28 +62,28 @@ the Js files point to Pages.
 
 
 ## ROADMAP OF IMPLEMENTATION ##
-# layout #
-    DONE___breakpoints
-    DONE___containers
-    DONE ALTERNATVELY__grid
-    DONE ALTERNATVELY__columns
-    DONE ALTERNATVELY__gutters
-    DONE___utilities
-    DONE___z-index
-    ADDED___section
-    ADDED___page
+#### layout #
+    -[x] breakpoints
+    -[x] containers
+    -[x] grid
+    -[x] columns
+    -[x] gutters
+    -[x] utilities
+    -[x] z-index
+    -[x] section
+    -[x] page
 
-# forms #
-    form control
-    select
-    checks a radios
-    range
-    input goups
-    floating labels
-    layout
-    validation
+#### forms #
+    -[ ] form control
+    -[ ] select
+    -[ ] checks a radios
+    -[ ] range
+    -[ ] input goups
+    -[ ] floating labels
+    -[ ] layout
+    -[ ] validation
 
-# components #
+#### components #
     accordion
     alerts
     badge
@@ -110,7 +110,7 @@ the Js files point to Pages.
     ADDED___overlay
      
 
-# helpers #
+#### helpers #
     clearfix
     NOTUSEFULLFORNOW__coloredlinks
     NOTUSEFULLFORNOW__ratio
