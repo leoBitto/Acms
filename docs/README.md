@@ -82,7 +82,7 @@ the Js files point to Pages.
     - [ ] validation
 
 #### components #
-    accordion
+    - [ ] accordion
     alerts
     badge
     breadcrumb
@@ -204,7 +204,7 @@ before creating the urls
     GenericForeignKey, you need to manually create a model 
     to connect A e B
 
-https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key
+[Generic Foreign Key by realpython](https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key)
 
 #### organization of the models in the file system
 / indicates directories
