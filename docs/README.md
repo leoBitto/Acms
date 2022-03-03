@@ -1,8 +1,6 @@
 
 # Acms
 
------------
-
 Acms is a Django app to organize content in a website.
 A content management system created with Bootstrap 5.0 
 and Django 4.0 . Its scope is to allow people with no 
