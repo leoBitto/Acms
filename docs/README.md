@@ -202,26 +202,26 @@ migrations and permissions.
 [Generic Foreign Key by realpython](https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key)
 
 #### organization of the models in the file system
-models
-├── ___init__.py
-├── abstract
-│   └── abstract.py
-├── components
-│   ├── article.py
-│   ├── button.py
-│   ├── card.py
-│   ├── footer.py
-│   ├── navbar.py
-│   └── overlay.py
-├── content
-│   ├── image.py
-│   ├── link.py
-│   └── text.py
-├── layout
-│   ├── container.py
-│   ├── grid.py
-│   └── section.py
-└── pages.py
+    models
+    ├── ___init__.py
+    ├── abstract
+    │   └── abstract.py
+    ├── components
+    │   ├── article.py
+    │   ├── button.py
+    │   ├── card.py
+    │   ├── footer.py
+    │   ├── navbar.py
+    │   └── overlay.py
+    ├── content
+    │   ├── image.py
+    │   ├── link.py
+    │   └── text.py
+    ├── layout
+    │   ├── container.py
+    │   ├── grid.py
+    │   └── section.py
+    └── pages.py
 
 
 ## CSS
@@ -302,24 +302,24 @@ Containers once the are part of a Section
 ### Link
 
 ## Templates
-templates
-├── Acms
-│   ├── base.html
-│   ├── button.html
-│   ├── card.html
-│   ├── container.html
-│   ├── footer.html
-│   ├── grid.html
-│   ├── link.html
-│   ├── navbar.html
-│   ├── overlay.html
-│   ├── section.html
-│   └── workspace.code-workspace
-└── admin
-    ├── app_list.html
-    ├── base_site.html
-    ├── change_form.html
-    └── image_form.html
+    templates
+    ├── Acms
+    │   ├── base.html
+    │   ├── button.html
+    │   ├── card.html
+    │   ├── container.html
+    │   ├── footer.html
+    │   ├── grid.html
+    │   ├── link.html
+    │   ├── navbar.html
+    │   ├── overlay.html
+    │   ├── section.html
+    │   └── workspace.code-workspace
+    └── admin
+        ├── app_list.html
+        ├── base_site.html
+        ├── change_form.html
+        └── image_form.html
 
 ## Admin 
 
