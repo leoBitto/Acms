@@ -62,35 +62,35 @@ the Js files point to Pages.
 
 ## ROADMAP OF IMPLEMENTATION ##
 #### layout #
-    -[x] breakpoints
-    -[x] containers
-    -[x] grid
-    -[x] columns
-    -[x] gutters
-    -[x] utilities
-    -[x] z-index
-    -[x] section
-    -[x] page
+- [x] breakpoints
+- [x] containers
+- [x] grid
+- [x] columns
+- [x] gutters
+- [x] utilities
+- [x] z-index
+- [x] section
+- [x] page
 
 #### forms #
-    -[ ] form control
-    -[ ] select
-    -[ ] checks a radios
-    -[ ] range
-    -[ ] input goups
-    -[ ] floating labels
-    -[ ] layout
-    -[ ] validation
+- [ ] form control
+- [ ] select
+- [ ] checks a radios
+- [ ] range
+- [ ] input goups
+- [ ] floating labels
+- [ ] layout
+- [ ] validation
 
 #### components #
-    accordion
-    alerts
-    badge
-    breadcrumb
-    buttons
-    buttons group
-    card
-    carousel
+    - [ ] accordion
+    - [ ] alerts
+    - [ ] badge
+    - [ ] breadcrumb
+    - [ ] buttons
+    - [ ] buttons group
+    - [x] card
+    - [ ] carousel
     close button
     collapse
     drop down
