@@ -10,7 +10,7 @@ knowledge to create simple websites that contain images and text
 ## Quick start
 
 
-1. [ ]Add "Acms" to your INSTALLED_APPS setting like this::
+1. Add "Acms" to your INSTALLED_APPS setting like this::
 
     ```
     INSTALLED_APPS = [
@@ -18,17 +18,16 @@ knowledge to create simple websites that contain images and text
         'Acms',
     ]
     ```
+2. Include the Acms URLconf in your project urls.py like this::
 
-2. [ ]Include the Acms URLconf in your project urls.py like this::
+    > path(``, include(('Acms.urls', 'Acms'), namespace="Acms")),
 
-    > path('', include(('Acms.urls', 'Acms'), namespace="Acms")),
+3. Run ``python manage.py migrate`` to create the Acms models.
 
-3. [ ]Run ``python manage.py migrate`` to create the Acms models.
-
-4. [ ]Start the development server and visit http://127.0.0.1:8000/admin/
+4. Start the development server and visit http://127.0.0.1:8000/admin/
    to create the models (you'll need the Admin app enabled).
 
-5. [ ]Visit http://127.0.0.1:8000 to see the website
+5. Visit http://127.0.0.1:8000 to see the website
 
 
 -----------
@@ -41,17 +40,17 @@ the display of content in an html page
 its implementation follow the bootstrap 5.0 docs
 https://getbootstrap.com/docs/5.0
 the idea is to create pages that are pointed by a series 
-of Sections,<div> tags, that organize Containers,
-<div> tags that have the 'container' class of bootstrap, they contain
-"content" whether it is Text<p>, Images<img>, Canvas<canvas>,
-Video<video> etc.., and grids, that are implemented with plain
+of Sections,``<div>`` tags, that organize Containers,
+``<div>`` tags that have the 'container' class of bootstrap, they contain
+"content" whether it is Text``<p>``, Images``<img>``, Canvas``<canvas>``,
+Video``<video>`` etc.., and grids, that are implemented with plain
 css and not using Bootstrap.
 There are also added a series of components that allow you
-to create HTML tags like <nav> and <footer> that refer to the
+to create HTML tags like ``<nav>`` and ``<footer>`` that refer to the
 page object(the base.html file) or <div> with particular set of
 attributes like Overlay, or special functionalities like 
 Carousel. The last two can be used within a Container and a 
-Section respectively; while the <nav> and <footer> components are
+Section respectively; while the ``<nav>`` and ``<footer>`` components are
 part of a Page.
 there is the possibility to extend the CSS files and add 
 JS functionality to the page thanks to the fact that every 
@@ -139,16 +138,16 @@ the Js files point to Pages.
 
 
 
-### How to ################################################
+### How to 
 
 
-# create a new Page #
+# create a new Page 
     1. create a Page object
     2. create a Section object pointing to the name 
         page
     3. restart the server if necessary
 
-# create a journal like page #
+# create a journal like page 
     1. create the articles, divided in paragraphs
     2. insert the content text created in two 
         containers
@@ -157,26 +156,26 @@ the Js files point to Pages.
 
 
 
-### Apps.py ##############################################
+### Apps.py 
 
 
 apps.py contain app configuration, it is called two times 
 in Acms. the ready method is overridden to create urls in 
 urlpatterns list (contained in urls.py) in order to create 
 the urls that will allow the user to go around the website. 
-since this is a config file is runned at the ''runserver'' 
+since this is a config file is runned at the ``runserver`` 
 command; in the ready method we import all we need to use
 it is done in the method so we are sure everything is loaded 
 before creating the urls
 
-### Models ####################################
+### Models 
 
 
 #NB# to implement a one to many relationship in django the 
     MANY have to point to the one, its not possible for the
     ONE to have a list of the many
 
-### ManyToMany relationship
+#### ManyToMany relationship
     class A:
         ...
     
@@ -191,7 +190,7 @@ before creating the urls
     b.As.all()      >> an 's' is added after the name of the class
     a.b_set.all()
 
-### GenericForeignKey
+#### GenericForeignKey
     Django offers a special way of referencing any model 
     in the project called GenericForeignKey.
     Generic foreign keys are part of the Content Types 
@@ -205,9 +204,9 @@ before creating the urls
     GenericForeignKey, you need to manually create a model 
     to connect A e B
 
-https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key
+[Generic Foreign Key by realpython](https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key)
 
-## organization of the models in the file system
+#### organization of the models in the file system
 / indicates directories
 /models
     __init__.py
@@ -222,7 +221,7 @@ https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key
         layout.py
 
 
-## css models and files that contain them.
+#### css models and files that contain them.
 files.py:    
                     Model
                     |
@@ -323,7 +322,7 @@ abstract objects like CSS and Flex.
 https://docs.djangoproject.com/en/4.0/ref/contrib/admin/
 the attributes of the admin objects that are set are:
 THEY ALL ACCEPT TUPLES OF N ELEMENTS
-    -list_display:  used to list the parameters in columns
+    - list_display:  used to list the parameters in columns
                     of the list of the objects of the model
                     for types of values can be used in the
                     tuple:
@@ -338,21 +337,21 @@ THEY ALL ACCEPT TUPLES OF N ELEMENTS
                         itself so having acce to all of its parameters
                     5. the decorator can be use also with @property
 
-    -fields    :  it refers to the form used to create an
+    - fields    :  it refers to the form used to create an
                 object, it include a series of 
                 attributes. if this is not defined ALL 
                 attributes are listed. this option should 
                 not be confused with the 'fields' 
                 dictionary key in the 'fieldsets' option
 
-    -fieldsets :  it control the layout of admin 'add' and
+    - fieldsets :  it control the layout of admin 'add' and
                 'change' pages, the forms used to create 
                 objects. it is a tuple of tuples. 
                 In each internal tuple a string is the 
                 first element, its the title of the group
                 of attributes, while the second element of
                 the tuple is a dictionary of:
-                -classes : used to define behavior, ACCEPT
+                - classes : used to define behavior, ACCEPT
                             a tuple of string elements. to
                             collapse the options:
                             ('collapse',)
@@ -360,27 +359,27 @@ THEY ALL ACCEPT TUPLES OF N ELEMENTS
                             ('wide')
                             these are CSS classes applied to
                             the fieldset
-                -fields  : its a tuple containing more
+                - fields  : its a tuple containing more
                             attributes that can be set
                             it is like using the fields
                             explained before.
-                -description:is a string containing extra text 
+                - description:is a string containing extra text 
                             displayed a the to of each fieldset
                             it can contain HTML elements
 
-    -exclude   :  it refers to the form used to create an
+    - exclude   :  it refers to the form used to create an
                 object, it exclude a series of 
                 attributes
-    -list_display_links: tuples of the properties that should be
+    - list_display_links: tuples of the properties that should be
                         links to the change page of the object
                         refered by the admin class
-    -list_filter: activate filters in the right sidebar of the
+    - list_filter: activate filters in the right sidebar of the
                 change list page. the tuple it accept should 
                 contain one the following types:
                 > a field name
                 > a class created using SimpleListFilter from admin
                 > a touple containing both of the options above
-    -search_fields: activate a searchbar 
+    - search_fields: activate a searchbar 
 
 
 
