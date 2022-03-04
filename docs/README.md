@@ -13,7 +13,7 @@ knowledge to create simple websites that contain images and text
 1. Add "Acms" to your INSTALLED_APPS setting like this::
 
     ```
-    INSTALLED_APPS = [
+    INSTALLED_APPS [
         ...
         'Acms',
     ]
@@ -61,74 +61,74 @@ the Js files point to Pages.
 
 ## ROADMAP OF IMPLEMENTATION ##
 #### layout #
-- [x] breakpoints
-- [x] containers
-- [x] grid
-- [x] columns
-- [x] gutters
-- [x] utilities
-- [x] z-index
-- [x] section
-- [x] page
+[x] breakpoints
+[x] containers
+[x] grid
+[x] columns
+[x] gutters
+[x] utilities
+[x] z-index
+[x] section
+[x] page
 
 #### forms #
-- [ ] form control
-- [ ] select
-- [ ] checks a radios
-- [ ] range
-- [ ] input goups
-- [ ] floating labels
-- [ ] layout
-- [ ] validation
+[ ] form control
+[ ] select
+[ ] checks a radios
+[ ] range
+[ ] input goups
+[ ] floating labels
+[ ] layout
+[ ] validation
 
 #### components #
-- [ ] accordion
-- [ ] alerts
-- [ ] badge
-- [ ] breadcrumb
-- [ ] buttons
-- [ ] buttons group
-- [x] card
-- [ ] carousel
-- [ ] close button
-- [ ] collapse
-- [ ] drop down
-- [ ] list group
-- [ ] modal
-- [ ] nav e tabs
-- [ ] navbar
-- [ ] offcanvas
-- [ ] pagination
-- [ ] popovers
-- [ ] progess
-- [ ] scrollpy
-- [ ] spinners
-- [ ] toast
-- [ ] tooltips
-- [x] overlay
+[ ] accordion
+[ ] alerts
+[ ] badge
+[ ] breadcrumb
+[ ] buttons
+[ ] buttons group
+[x] card
+[ ] carousel
+[ ] close button
+[ ] collapse
+[ ] drop down
+[ ] list group
+[ ] modal
+[ ] nav e tabs
+[ ] navbar
+[ ] offcanvas
+[ ] pagination
+[ ] popovers
+[ ] progess
+[ ] scrollpy
+[ ] spinners
+[ ] toast
+[ ] tooltips
+[x] overlay
      
 
 # helpers 
-- [ ] clearfix
-- [x] position
-- [x] visually hidden 
-- [x] _stretched link (OVERLAY COMPONENT)
+[ ] clearfix
+[x] position
+[x] visually hidden 
+[x] _stretched link (OVERLAY COMPONENT)
 
 # utilities 
-- [x] Background
-- [x] borders
-- [x] colors
-- [x] display
-- [x] Flex
-- [ ] interactions
-- [x] overflow
-- [x] position
-- [x] shadows
-- [x] sizing
-- [x] spacing
-- [x] text
-- [x] vertical align
-- [x] visibility
+[x] Background
+[x] borders
+[x] colors
+[x] display
+[x] Flex
+[ ] interactions
+[x] overflow
+[x] position
+[x] shadows
+[x] sizing
+[x] spacing
+[x] text
+[x] vertical align
+[x] visibility
 
 
 
@@ -197,9 +197,7 @@ migrations and permissions.
 
     To implement a many-to-many relation using 
     GenericForeignKey, you need to manually create a model 
-    to connect A e B
-
-[Generic Foreign Key by realpython](https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key)
+    to connect A e B[Generic Foreign Key by realpython](https://realpython.com/modeling-polymorphism-django-python/#generic-foreign-key)
 
 #### organization of the models in the file system
     models
