@@ -36,32 +36,6 @@ class Page(models.Model):
     def __str__(self):
         return self.url
 
-    # def model_save(self, *args, **kwargs):
-    #     from ..urls import urlpatterns
-    #     from ..views import views
-    #     from django.urls import path
-    #     #add the name and the url to urlpatterns
-    #     if self.url == '':
-    #         n = self.name
-    #     else:
-    #         n = self.url
-    #     urlpatterns.append(
-    #             path(
-    #                 self.url, 
-    #                 views.base, 
-    #                 name=n
-    #                 )
-    #             )
-        #super().save(*args, **kwargs)#call the real save() method   
-
-    def delete(self, *args, **kwargs):
-        from ..urls import urlpatterns
-       
-        for l in urlpatterns:
-            if l.name == self.url:
-                urlpatterns.remove(l)
-        print("i killed them all ")
-        super().delete(*args, **kwargs)#real delete()
         
 
 def post_page_created_signal(sender, instance, created, **kwargs):    

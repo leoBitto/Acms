@@ -12,6 +12,7 @@ from .models.components.navbar import Navbar
 from .models.components.footer import Footer
 from .models.components.overlay import Overlay
 from .models.components.card import Card
+from .models.components.article import Article
 
 html_tags =('HTML tags',
             {
@@ -670,6 +671,34 @@ class ImageAdmin(admin.ModelAdmin):
         return format_html('<img src="{0}" style="height:400px;" />'.format(obj.url.url))
 
 
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'author',
+        'date_created',
+        'date_updated',
+        
+    )
+    fieldsets = (
+        ('MetaData',
+            {
+            'fields':(
+                'slug',
+                'author',
+                ),
+            }
+            ),
+        ('Content',
+            {
+            'fields':(
+                'title',
+                'paragraphs',
+                ),
+            }
+            ),
+    )
+    prepopulated_fields = {"slug": ("title",)}
+
 admin.site.register(Page, PageAdmin)
 admin.site.register(Navbar, NavbarAdmin)
 admin.site.register(Grid, GridAdmin)
@@ -681,5 +710,6 @@ admin.site.register(Card, CardAdmin)
 admin.site.register(Overlay, OverlayAdmin)
 admin.site.register(Link,LinkAdmin)
 admin.site.register(Image, ImageAdmin)
+admin.site.register(Article, ArticleAdmin)
 
 

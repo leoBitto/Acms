@@ -14,19 +14,28 @@ class AcmsConfig(AppConfig):
         from .models.pages import Page
         try:
             pages = Page.objects.all()
-            for page in pages:
-                if page.url == '':
-                    n = page.name
-                else:
-                    n = page.url
+            if not pages:
                 urlpatterns.append(
-                        path(
-                            page.url, 
-                            views.base, 
-                            name=n
+                            path(
+                                '', 
+                                views.firstLanding, 
+                                name="landing"
+                                )
                             )
-                        )
-            super().ready(*args, **kwargs)
+            else:
+                for page in pages:
+                    if page.url == '':
+                        n = page.name
+                    else:
+                        n = page.url
+                    urlpatterns.append(
+                            path(
+                                page.url, 
+                                views.base, 
+                                name=n
+                                )
+                            )
+                super().ready(*args, **kwargs)
         except:
             super().ready(*args, **kwargs)
         

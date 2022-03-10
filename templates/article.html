@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+    <h1>{{ article.title }}</h1>
+    <div class="d-flex flex-row">
+        <span>author: {{ article.author }}</span>
+        <span>created: {{ article.date_created }}</span>
+        <span>updated: {{ article.date_updated }}</span>
+    </div>
+    {% for paragraph in article.paragraphs.all %}
+        {% block paragraph%}
+        {% endblock %}
+    {% endfor %}
+</section>
+
+{% endblock content %}
