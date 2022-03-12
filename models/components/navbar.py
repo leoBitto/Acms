@@ -2,25 +2,15 @@
 from django.db import models
 from ..abstract.abstract import Flex
 from ..content.image import Image
-#from ..pages import Page
+
 """
 Navbar component model it is rendered with a <nav>
-one navbar can be 
+one navbar can be pointed by the Nav elements that allow to choose which
+
 """
+
 class Navbar(Flex):
 
-    # #pages displayed in the navbar:
-    # pages_displayed = models.ManyToManyField(
-    #     Page,
-    #     blank=True,
-    # )
-
-    # #pages where the navbar appear
-    # pages_with_navbar = models.ManyToManyField(
-    #     Page,
-    #     blank=True,
-
-    # )
 
     has_user_functionality = models.BooleanField(default=False)
 
@@ -75,15 +65,52 @@ class Navbar(Flex):
                             )
     
     @property
-    def get_pages(self):
-        from ..pages import Page
+    def get_links(self):
         links=[]
-        for page in Page.objects.all():
-            if page.url == '' : 
-                u=page.name 
-            else: u=page.url
-            links.append((page.name, 'Acms:' + u))
+        for nav in self.nav_set.all():
+            if nav.url_toPage == '' : 
+                u=nav.name
+            else: 
+                u=nav.url_toPage
+            links.append((nav.name, 'Acms:' + u))
         return links
 
     def __str__(self):
         return "navbar"
+
+
+class Nav(models.Model):
+    name = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        help_text='the string shown in the navbar'
+    )
+    url_toPage = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text='the url that the page has    its not a page to avoid circular import'
+    )
+    navbar = models.ForeignKey(
+        Navbar,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        help_text='the navbar the nav belongs to'
+    )
+    order = models.IntegerField(
+        help_text='the order the nav has'
+    )
+
+    disabled = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+        choices=[
+            ('disabled', 'disabled'),
+            ('','active'),
+            ],
+        default='',
+        help_text='if disabled the link is shown as greyish'
+    )

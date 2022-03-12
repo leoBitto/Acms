@@ -8,7 +8,7 @@ from .models.layout.container import Container
 from .models.layout.grid import Grid
 from .models.layout.section import Section
 from .models.content.link import Link
-from .models.components.navbar import Navbar
+from .models.components.navbar import Navbar, Nav
 from .models.components.footer import Footer
 from .models.components.overlay import Overlay
 from .models.components.card import Card
@@ -212,7 +212,30 @@ class NavbarAdmin(admin.ModelAdmin):
             ),
 
         )
-  
+
+
+class NavAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'url_toPage',
+        'navbar',
+        'order',
+        'disabled',
+    )
+    fieldsets = (
+        ('Nav Properties',
+                {
+                    'fields':(
+                        'name',
+                        'navbar',
+                        'url_toPage',
+                        'order',
+                        'disabled'
+                        ),
+                    'description':"""the properties relative to the nav"""
+                }),
+    )
+
 
 class FooterAdmin(admin.ModelAdmin):
     list_display = (
@@ -701,6 +724,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(Page, PageAdmin)
 admin.site.register(Navbar, NavbarAdmin)
+admin.site.register(Nav, NavAdmin)
 admin.site.register(Grid, GridAdmin)
 admin.site.register(Footer, FooterAdmin)
 admin.site.register(Text, TextAdmin)
