@@ -2,8 +2,14 @@
 {% load static %}
 {% block content %}
 
-<h1>Articles</h1>
-<ul>
+{% with navbar as navbar %}
+    {% block navbar %}
+    {% include "navbar.html" %}
+    {% endblock %}
+{% endwith %} 
+
+<h1 class="h1 text-center">Articles</h1>
+<ul class="container-fluid">
 {% for article in object_list %}
     
     <li>{{ article.date_updated|date }} - <a href="{{article.slug}}" >{{ article.title }}</a></li>
