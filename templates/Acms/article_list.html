@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Articles</h1>
+<ul>
+{% for article in object_list %}
+    
+    <li>{{ article.date_updated|date }} - <a href="{{article.slug}}" >{{ article.title }}</a></li>
+    
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

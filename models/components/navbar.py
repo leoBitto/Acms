@@ -90,7 +90,9 @@ class Nav(models.Model):
         max_length=50,
         blank=True,
         null=True,
-        help_text='the url that the page has    its not a page to avoid circular import'
+        help_text="""the url that the page has
+            it can be(should be) a namespace from the url
+             its not a page to avoid circular import"""
     )
     navbar = models.ForeignKey(
         Navbar,

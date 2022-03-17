@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 
 from ..models.components.article import Article
 from ..models.pages import Page
+from django.views.generic.list import ListView
 
 
 # Create your views here.
@@ -22,6 +23,14 @@ def base(request):
 def firstLanding(request):
     return render(request, 'firstLanding.html', {})
 
+class articleListView(ListView):
+    model = Article
+    pagination = 20
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+        
 
 def articleView(request, slug):
     
@@ -29,8 +38,5 @@ def articleView(request, slug):
     context = {
         'article'  : article,        
         }
-
-    # from ..urls import urlpatterns
-    # print(urlpatterns)
 
     return render(request, 'article.html', context)
