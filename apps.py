@@ -12,6 +12,7 @@ class AcmsConfig(AppConfig):
         #add the urls of the Page objects
         #in the db in urlpatterns in urls.py
         from .models.pages import Page
+
         try:
             pages = Page.objects.all()
             if not pages:

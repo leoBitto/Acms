@@ -30,6 +30,7 @@ class Page(models.Model):
         blank=True,
         null=True,
         )
+        
     title = models.CharField(
         max_length=100, 
         blank=True, 
