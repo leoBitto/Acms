@@ -166,8 +166,25 @@ class PageAdmin(admin.ModelAdmin):
      
         )
 
+class NavInline(admin.StackedInline):
+    model = Nav
+    extra = 0
+    fieldsets = (
+        ('Nav Properties',
+                {
+                    'fields':(
+                        'name',
+                        'navbar',
+                        'url_toPage',
+                        'order',
+                        'disabled'
+                        ),
+                    'description':"""the properties relative to the nav"""
+                }),
+    )
 
 class NavbarAdmin(admin.ModelAdmin):
+    inlines = [NavInline]
     list_display = (
             '__str__',
             'brand_name',

@@ -6,8 +6,7 @@ from .views import views
 app_name = 'Acms'
 urlpatterns = [
 
-    path('articles/', views.articleListView.as_view(), name="articles"),
-    path('articles/<slug:slug>', views.articleView, name='article'),
+
 ]
 
 # # add this lines
