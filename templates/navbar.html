@@ -13,7 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-nav navbar-collapse justify-content{{navbar.justify_content}} " id="navbarNavAltMarkup">
-        {% for name, urlLink in navbar.get_links %}
+        {% for name, urlLink, order in navbar.get_links %}
           <a class="nav-link text-center" href="{% url urlLink %}">{{name}}</a>
         {% endfor %}
     </div>

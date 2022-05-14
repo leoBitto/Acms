@@ -72,8 +72,11 @@ class Navbar(Flex):
                 u=nav.name
             else: 
                 u=nav.url_toPage
-            links.append((nav.name, u))#'Acms:' + 
-        return links
+            links.append((nav.name, u, nav.order))#'Acms:' + 
+        
+        sortedLink = sorted(links, key=lambda link:link[2])
+        
+        return sortedLink
 
     def __str__(self):
         return "navbar"

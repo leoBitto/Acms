@@ -131,8 +131,9 @@ class SectionInline(admin.StackedInline):
 class PageAdmin(admin.ModelAdmin):
     
     inlines = [SectionInline]
-
+    prepopulated_fields = {"name": ("url",)}
     list_display = ( 
+        'title',
         'name',
         'url', 
         'navbar',
