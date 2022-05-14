@@ -72,7 +72,7 @@ class Navbar(Flex):
                 u=nav.name
             else: 
                 u=nav.url_toPage
-            links.append((nav.name, 'Acms:' + u))
+            links.append((nav.name, u))#'Acms:' + 
         return links
 
     def __str__(self):
@@ -91,8 +91,8 @@ class Nav(models.Model):
         blank=True,
         null=True,
         help_text="""the url that the page has
-            it can be(should be) a namespace from the url
-             its not a page to avoid circular import"""
+            it must contain a namespace from the url
+            its not a page to avoid circular import"""
     )
     navbar = models.ForeignKey(
         Navbar,
