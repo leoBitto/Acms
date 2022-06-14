@@ -68,11 +68,16 @@ class Navbar(Flex):
     def get_links(self):
         links=[]
         for nav in self.nav_set.all():
-            if nav.url_toPage == '' : 
-                u=nav.name
-            else: 
-                u=nav.url_toPage
-            links.append((nav.name, u, nav.order))#'Acms:' + 
+            
+            # if the url is empty,
+            #probably a landing page,
+            # use the name as the url
+            # if nav.url_toPage == '' : 
+            #     u=nav.name
+            # else: 
+            #     u=nav.url_toPage
+            
+            links.append((nav.name, nav.url_toPage, nav.order))#'Acms:' + 
         
         sortedLink = sorted(links, key=lambda link:link[2])
         
@@ -94,7 +99,7 @@ class Nav(models.Model):
         blank=True,
         null=True,
         help_text="""the url that the page has
-            it must contain a namespace from the url
+           use a slash / to indicate the root domain (landing page)
             its not a page to avoid circular import"""
     )
     navbar = models.ForeignKey(

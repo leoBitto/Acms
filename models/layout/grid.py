@@ -35,7 +35,7 @@ grid container
 
 ############################################################
 ############################################################
-from pickle import TRUE
+
 from django.db import models
 
 from ..abstract.abstract import Flex

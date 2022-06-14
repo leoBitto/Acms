@@ -7,14 +7,16 @@
       {% if navbar.logo != null %}
       <img src="/media/{{navbar.logo}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
       {% endif %}
+      {% if navbar.brand_name != null %}
       {{navbar.brand_name}}
+      {% endif %}
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-nav navbar-collapse justify-content{{navbar.justify_content}} " id="navbarNavAltMarkup">
         {% for name, urlLink, order in navbar.get_links %}
-          <a class="nav-link text-center" href="{% url urlLink %}">{{name}}</a>
+          <a class="nav-link text-center" href={{urlLink}}>{{name}}</a>
         {% endfor %}
     </div>
 
